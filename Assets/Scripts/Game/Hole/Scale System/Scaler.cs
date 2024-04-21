@@ -48,6 +48,7 @@ namespace ScalingSystem
             {
                 _currentPoint = 0;
                 _scalingObject.Scale();
+                _visualization.Reset();
             }
         }
     }
