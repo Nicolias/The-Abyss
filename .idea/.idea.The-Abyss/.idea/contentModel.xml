@@ -24,6 +24,15 @@
               <e p="readme.txt" t="Include" />
             </e>
           </e>
+          <e p="GUI PRO Kit - Fantasy RPG" t="Include">
+            <e p="Extensions" t="Include">
+              <e p="UIParticle" t="Include">
+                <e p="hidden particle.shader" t="Include" />
+                <e p="UIAdditive.shader" t="Include" />
+                <e p="UIParticleSystem.cs" t="Include" />
+              </e>
+            </e>
+          </e>
           <e p="Joystick Pack" t="Include">
             <e p="Scripts" t="Include">
               <e p="Base" t="Include">
@@ -80,11 +89,11 @@
           <e p="Game" t="Include">
             <e p="Cubs Collecting System" t="Include">
               <e p="Cub.cs" t="Include" />
-              <e p="CubsCollector.cs" t="Include" />
             </e>
             <e p="Hole" t="Include">
               <e p="Ground.cs" t="Include" />
               <e p="Hole.cs" t="Include" />
+              <e p="HoleCollider.cs" t="Include" />
               <e p="HoleMovement.cs" t="Include" />
               <e p="Scale System" t="Include">
                 <e p="Scaler.cs" t="Include" />
@@ -98,7 +107,13 @@
               <e p="Timer.cs" t="Include" />
             </e>
             <e p="UI" t="Include">
+              <e p="Cubs Collection" t="Include">
+                <e p="NumbersPool.cs" t="Include" />
+                <e p="NumberView.cs" t="Include" />
+              </e>
               <e p="IChangable.cs" t="Include" />
+              <e p="MoneyCounter.cs" t="Include" />
+              <e p="MoneyText.cs" t="Include" />
               <e p="Sliders" t="Include">
                 <e p="AbstractSliderView.cs" t="Include" />
                 <e p="ProgressSlider.cs" t="Include" />

@@ -1,18 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Cub : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Transform _transform;
+    private GameObject _gameObject;
+    
+    public Vector3 Position => _transform.position;
+
+    private void Awake()
     {
-        
+        _transform = transform;
+        _gameObject = gameObject;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Enable()
     {
-        
+        _gameObject.SetActive(true);
+    }
+    
+    public void Disabel()
+    {
+        _gameObject.SetActive(false);
     }
 }

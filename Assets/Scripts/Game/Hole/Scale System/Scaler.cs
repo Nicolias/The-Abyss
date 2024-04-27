@@ -4,16 +4,16 @@ namespace ScalingSystem
 {
     public class Scaler
     {
-        private CubsCollector _cubsCollector;
+        private HoleCollider _holeCollider;
         private ScalingObject _scalingObject;
         private ScalerProgressBar _visualization;
 
         private int _currentPoint = 0;
         private int _pointsCountForScale = 10;
 
-        public Scaler(CubsCollector cubsCollector, ScalingObject scalingObject, ScalerProgressBar progressBar)
+        public Scaler(HoleCollider holeCollider, ScalingObject scalingObject, ScalerProgressBar progressBar)
         {
-            if(cubsCollector == null)
+            if(holeCollider == null)
                 throw new ArgumentNullException();
             
             if(scalingObject == null)
@@ -22,23 +22,23 @@ namespace ScalingSystem
             if(progressBar == null)
                 throw new ArgumentNullException();
             
-            _cubsCollector = cubsCollector;
+            _holeCollider = holeCollider;
             _scalingObject = scalingObject;
             _visualization = progressBar;
         }
         
         public void Enable()
         {
-            _cubsCollector.Collected += OnCollected;
+            _holeCollider.Detected += OnDetected;
             _visualization.Initialize(_pointsCountForScale);
         }
 
         public void Disable()
         {
-            _cubsCollector.Collected -= OnCollected;
+            _holeCollider.Detected -= OnDetected;
         }
 
-        private void OnCollected()
+        private void OnDetected(Cub cub)
         {
             _currentPoint++;
 

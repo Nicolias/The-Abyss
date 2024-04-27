@@ -10,11 +10,23 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/UI/Cubs Collection/NumbersPool.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Game/Hole/HoleCollider.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Hole/Scale System/Scaler.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Game/Hole/Scale System/ScalerProgressBar.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/UI/MoneyText.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/UI/Cubs Collection/NumberView.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Hole/HoleCollider.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/UI/Cubs Collection/NumbersPool.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/UI/MoneyCounter.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Hole/Scale System/Scaler.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Hole/Scale System/ScalingObject.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Servise/CubsCounter.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Game/Cubs Collecting System/Cub.cs" />
       </list>
     </option>
   </component>
@@ -37,6 +49,8 @@
       <option name="presentableId" value="Default" />
       <updated>1713693874196</updated>
       <workItem from="1713693880656" duration="5487000" />
+      <workItem from="1713880693975" duration="4127000" />
+      <workItem from="1714225156510" duration="4773000" />
     </task>
     <servers />
   </component>
@@ -45,5 +59,11 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1713881808196">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1713881808196" />
   </component>
 </project>

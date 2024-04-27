@@ -5,7 +5,7 @@ namespace ScalingSystem
 {
     public class ScalingObject : MonoBehaviour
     {
-        [SerializeField] private CubsCollector _collector;
+        [SerializeField] private HoleCollider _holeCollider;
         [SerializeField] private ScalerProgressBar _progressBar;
         
         private Scaler _scaler;
@@ -17,7 +17,7 @@ namespace ScalingSystem
         private void Awake()
         {
             _selfTransform = transform;
-            _scaler = new Scaler(_collector, this, _progressBar);
+            _scaler = new Scaler(_holeCollider, this, _progressBar);
         }
 
         private void OnEnable()

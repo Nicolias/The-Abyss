@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CubsCounter : MonoBehaviour, IChangable
 {
-    [SerializeField] private CubsCollector _collector;
+    [SerializeField] private HoleCollider _holeCollider;
 
     private int _collected = 0;
     
@@ -19,16 +19,17 @@ public class CubsCounter : MonoBehaviour, IChangable
 
     private void OnEnable()
     {
-        _collector.Collected += OnCollected;
+        _holeCollider.Detected += OnCollected;
     }
 
     private void OnDisabel()
     {
-        _collector.Collected -= OnCollected;
+        _holeCollider.Detected -= OnCollected;
     }
 
-    private void OnCollected()
+    private void OnCollected(Cub cub)
     {
+        cub.Disabel();
         _collected++;
         Changed?.Invoke(_collected);
     }
