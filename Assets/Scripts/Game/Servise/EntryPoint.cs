@@ -1,7 +1,8 @@
+using IJunior.TypedScenes;
 using SliderViewNameSpace;
 using UnityEngine;
 
-public class EntryPoint : MonoBehaviour
+public class EntryPoint : MonoBehaviour, ISceneLoadHandler<GameConfig>
 {
     [SerializeField] private CubsCounter _cubsCounter;
     [SerializeField] private SmoothSliderView _fillCubsSlider;
@@ -9,12 +10,16 @@ public class EntryPoint : MonoBehaviour
     [SerializeField] private Timer _timer;
     [SerializeField] private TimerSlider _timerTimerSlider;
 
-    private void Start()
+    [SerializeField] private CubsSpawner _cubsSpawner;
+
+    public void OnSceneLoaded(GameConfig argument)
     {
-        _cubsCounter.Initialize(10);
+        _cubsCounter.Initialize(argument.CubsCount);
         _fillCubsSlider.Initialize(_cubsCounter);
 
-        _timer.Initialize(30);
+        _timer.Initialize(argument.TimerValue);
         _timerTimerSlider.Initialize(_timer);
+
+        _cubsSpawner.Spawn(argument.CubsCount);
     }
 }

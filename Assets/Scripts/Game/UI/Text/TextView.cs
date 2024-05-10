@@ -7,8 +7,8 @@ namespace SliderViewNameSpace
     public abstract class TextView : MonoBehaviour
     {
         protected TMP_Text Text { get; private set; }
-        
-        private void Awake()
+
+        private void OnValidate()
         {
             Text = GetComponent<TMP_Text>();
         }
