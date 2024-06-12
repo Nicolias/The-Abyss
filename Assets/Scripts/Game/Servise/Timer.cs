@@ -40,10 +40,10 @@ public class Timer : MonoBehaviour, IChangable
             }
             else
             {
+                Changed?.Invoke(timeLeft);
+
                 yield return waitForSeconds;
                 timeLeft--;
-
-                Changed?.Invoke(timeLeft);
             }
         }
     }
