@@ -6,11 +6,17 @@ namespace SliderViewNameSpace
     [RequireComponent(typeof(TMP_Text))]
     public abstract class TextView : MonoBehaviour
     {
-        protected TMP_Text Text { get; private set; }
+        private TMP_Text _text;
 
-        private void OnValidate()
+        protected TMP_Text Text
         {
-            Text = GetComponent<TMP_Text>();
+            get 
+            {
+                if(_text == null)
+                    _text = GetComponent<TMP_Text>();
+
+                return _text;
+            }
         }
     }
 }

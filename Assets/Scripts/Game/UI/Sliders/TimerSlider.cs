@@ -9,13 +9,13 @@ namespace SliderViewNameSpace
         protected override void OnInitialized()
         {
             Slider.value = MaxValue;
-            _textVisualization.Update(MaxValue);
+            _textVisualization.UpdateUI(MaxValue);
         }
 
         protected override void OnSliderChanged(float currentValue)
         {
             Slider.value = currentValue;
-            _textVisualization.Update(currentValue);
+            _textVisualization.UpdateUI(currentValue);
         }
     }
 }

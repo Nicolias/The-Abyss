@@ -4,11 +4,11 @@ namespace SliderViewNameSpace
 {
     public class TimerText : TextView
     {
-        public void Update(float secondsLeft)
+        public void UpdateUI(float secondsLeft)
         {
             TimeSpan timeLeft = TimeSpan.FromSeconds(secondsLeft);
-            
-            Text.text = $"{timeLeft.Minutes} : {timeLeft.Seconds}";
+
+            Text.text = timeLeft.ToString(@"mm\:ss");
         }
     }
 }

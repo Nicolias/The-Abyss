@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace SliderViewNameSpace
 {
-    [RequireComponent (typeof(Slider))]
+    [RequireComponent(typeof(Slider))]
     public sealed class SmoothSliderView : AbstractSliderView
     {
         [SerializeField] private FillTextView _textVisualization;
@@ -21,15 +21,15 @@ namespace SliderViewNameSpace
         {
             if (_fillHealthBar != null)
                 StopCoroutine(_fillHealthBar);
-            
-            _textVisualization.Update(currentValue, MaxValue);
+
+            _textVisualization.UpdateUI(currentValue, MaxValue);
 
             _fillHealthBar = StartCoroutine(FillHealthBar(currentValue));
         }
 
         private IEnumerator FillHealthBar(float currentHealth)
         {
-            float currentHealthNormolized = currentHealth / MaxValue; 
+            float currentHealthNormolized = currentHealth / MaxValue;
 
             while (Slider.normalizedValue != currentHealthNormolized)
             {

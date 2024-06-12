@@ -23,7 +23,7 @@ namespace ScalingSystem
             _progressBar = GetComponent<Image>();
         }
 
-        public void Update(float currentValue)
+        public void UpdateUI(float currentValue)
         {
             if(currentValue < 0 || currentValue > _maxValue)
                 throw new ArgumentOutOfRangeException();

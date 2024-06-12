@@ -19,7 +19,7 @@ public class NumberView : MonoBehaviour
     {
         gameObject.SetActive(true);
     }
-    
+
     private void Awake()
     {
         _gameObject = gameObject;

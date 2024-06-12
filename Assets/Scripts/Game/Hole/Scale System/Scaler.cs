@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace ScalingSystem
 {
@@ -10,8 +11,9 @@ namespace ScalingSystem
 
         private int _currentPoint = 0;
         private int _pointsCountForScale = 10;
+        private Vector3 _scaleFactor;
 
-        public Scaler(HoleCollider holeCollider, ScalingObject scalingObject, ScalerProgressBar progressBar)
+        public Scaler(HoleCollider holeCollider, ScalingObject scalingObject, ScalerProgressBar progressBar, Vector3 scaleFactor)
         {
             if(holeCollider == null)
                 throw new ArgumentNullException();
@@ -25,6 +27,7 @@ namespace ScalingSystem
             _holeCollider = holeCollider;
             _scalingObject = scalingObject;
             _visualization = progressBar;
+            _scaleFactor = scaleFactor;
         }
         
         public void Enable()
@@ -42,12 +45,12 @@ namespace ScalingSystem
         {
             _currentPoint++;
 
-            _visualization.Update(_currentPoint);
+            _visualization.UpdateUI(_currentPoint);
             
             if (_currentPoint == _pointsCountForScale)
             {
                 _currentPoint = 0;
-                _scalingObject.Scale();
+                _scalingObject.Scale(_scaleFactor);
                 _visualization.Reset();
             }
         }
