@@ -18,6 +18,6 @@ public class OpenGameButton : MonoBehaviour
 
     public void LoadGame()
     {
-        Game.Load(new GameConfig());
+        Game.Load(new GameConfig(new AbilitiesConfig(10,10,10)));
     }
 }

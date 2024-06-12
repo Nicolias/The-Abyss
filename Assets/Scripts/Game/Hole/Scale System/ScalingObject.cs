@@ -15,6 +15,8 @@ namespace ScalingSystem
 
         private float _scalingDuration = 3f;
 
+        public event Action Completed;
+
         private void Awake()
         {
             _selfTransform = transform;
@@ -34,12 +36,12 @@ namespace ScalingSystem
         public void Scale(Vector3 scaleFactor)
         {
 
-            _selfTransform.DOScale(_selfTransform.localScale + scaleFactor, _scalingDuration);
+            _selfTransform.DOScale(_selfTransform.localScale + scaleFactor, _scalingDuration).OnComplete(() => Completed?.Invoke());
         }
 
         public void Unscale(Vector3 scaleFactor)
         {
-            _selfTransform.DOScale(_selfTransform.localScale - scaleFactor, _scalingDuration);
+            _selfTransform.DOScale(_selfTransform.localScale - scaleFactor, _scalingDuration).OnComplete(() => Completed?.Invoke());
         }
     }
 }

@@ -4,22 +4,18 @@ using UnityEngine;
 
 public class EntryPoint : MonoBehaviour, ISceneLoadHandler<GameConfig>
 {
-    [SerializeField] private CubsCounter _cubsCounter;
-    [SerializeField] private SmoothSliderView _fillCubsSlider;
+    [SerializeField] private CubsRoot _cubsRoot;
+    [SerializeField] private AbilitiesRoot _abilitiesRoot;
     
     [SerializeField] private Timer _timer;
     [SerializeField] private TimerSlider _timerTimerSlider;
 
-    [SerializeField] private CubsSpawner _cubsSpawner;
-
     public void OnSceneLoaded(GameConfig argument)
     {
-        _cubsCounter.Initialize(argument.CubsCount);
-        _fillCubsSlider.Initialize(_cubsCounter);
+        _cubsRoot.Initialize(argument.CubsCount);
+        _abilitiesRoot.Initialize(argument.Abilities);
 
         _timer.Initialize(argument.TimerValue);
         _timerTimerSlider.Initialize(_timer);
-
-        _cubsSpawner.Spawn(argument.CubsCount);
     }
 }
