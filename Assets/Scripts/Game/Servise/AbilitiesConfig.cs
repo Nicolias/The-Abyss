@@ -32,7 +32,7 @@ public class AbilitiesConfig : IAbilitiesContainer
         Debug.Log(FreezeTimeAbilitieCount);
     }
 
-    private void Add(SpeedItem freezeTimeItem, int amount)
+    private void Add(SpeedItem speedTime, int amount)
     {
         if(amount < 0) 
             throw new ArgumentOutOfRangeException();
@@ -48,7 +48,7 @@ public class AbilitiesConfig : IAbilitiesContainer
         FreezeTimeAbilitieCount += amount;
     }
 
-    private void Add(ScaleItem freezeTimeItem, int amount)
+    private void Add(ScaleItem scaleItem, int amount)
     {
         if (amount < 0)
             throw new ArgumentOutOfRangeException();

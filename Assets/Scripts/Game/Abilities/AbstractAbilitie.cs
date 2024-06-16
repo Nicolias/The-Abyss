@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,11 +8,10 @@ using UnityEngine.UI;
 public abstract class AbstractAbilitie : MonoBehaviour
 {
     [SerializeField] private int _duration;
+    [SerializeField] private TMP_Text _count;
 
     private Button _button;
     private WaitForSeconds _waitForSeconds;
-
-    private bool _isReady = true;
 
     protected abstract event Action EffectEnd;
 
@@ -19,7 +19,11 @@ public abstract class AbstractAbilitie : MonoBehaviour
 
     public void Initialize(int count)
     {
+        if(count < 0)
+            throw new ArgumentOutOfRangeException();
+
         Count = count;
+        _count.text = count.ToString();
     }
 
     private void Awake()
@@ -32,6 +36,9 @@ public abstract class AbstractAbilitie : MonoBehaviour
     {
         _button.onClick.AddListener(UseAbilitie);
         EffectEnd += OnEffectEnd;
+
+        if (Count == 0)
+            _button.interactable = false;
     }
 
     private void OnDisable()
@@ -45,11 +52,12 @@ public abstract class AbstractAbilitie : MonoBehaviour
 
     private void UseAbilitie()
     {
-        if (Count == 0 || _isReady == false)
+        if (Count == 0 || _button.interactable == false)
             return;
 
         Count--;
-        _isReady = false;
+        _button.interactable = false;
+        _count.text = Count.ToString();
 
         StartCoroutine(StartAbilitie());
     }
@@ -63,6 +71,6 @@ public abstract class AbstractAbilitie : MonoBehaviour
 
     private void OnEffectEnd()
     {
-        _isReady = true;
+        _button.interactable = Count > 0;
     }
 }
