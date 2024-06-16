@@ -1,5 +1,6 @@
 using IJunior.TypedScenes;
 using SliderViewNameSpace;
+using System;
 using UnityEngine;
 
 public class EntryPoint : MonoBehaviour, ISceneLoadHandler<GameConfig>
@@ -12,6 +13,9 @@ public class EntryPoint : MonoBehaviour, ISceneLoadHandler<GameConfig>
 
     public void OnSceneLoaded(GameConfig argument)
     {
+        if (argument == null)
+            throw new NullReferenceException();
+
         _cubsRoot.Initialize(argument.CubsCount);
         _abilitiesRoot.Initialize(argument.Abilities);
 
