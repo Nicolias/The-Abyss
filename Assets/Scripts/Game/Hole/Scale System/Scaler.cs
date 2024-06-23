@@ -10,7 +10,7 @@ namespace ScalingSystem
         private ScalerProgressBar _visualization;
 
         private int _currentPoint = 0;
-        private int _pointsCountForScale = 10;
+        private int _pointsCountForScale = 20;
         private Vector3 _scaleFactor;
 
         public Scaler(HoleCollider holeCollider, ScalingObject scalingObject, ScalerProgressBar progressBar, Vector3 scaleFactor)

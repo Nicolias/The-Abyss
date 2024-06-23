@@ -3,8 +3,8 @@
 [Serializable]
 public class GameConfig
 {
-    public int CubsCount { get; private set; } = 100;
-    public int TimerValue { get; private set; } = 50;
+    public int CubsCount { get; private set; } = 200;
+    public int TimerValue { get; private set; } = 30;
 
     public AbilitiesConfig Abilities { get; private set; }
 

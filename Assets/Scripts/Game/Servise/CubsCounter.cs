@@ -14,6 +14,7 @@ public class CubsCounter : MonoBehaviour, IChangable
 
     public void Initialize(int cubsCount)
     {
+        _collected = 0;
         MaxValue = cubsCount;
     }
 
@@ -22,7 +23,7 @@ public class CubsCounter : MonoBehaviour, IChangable
         _holeCollider.Detected += OnCollected;
     }
 
-    private void OnDisabel()
+    private void OnDisable()
     {
         _holeCollider.Detected -= OnCollected;
     }

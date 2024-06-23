@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Plugins/TypedScenes/Samples/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Test.unity
+    guid: fb91b337c6335af4395a4f0177a9d00a
   m_configObjects:
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
       guid: ec50d182b15f0d3488add433fa467fa5, type: 2}

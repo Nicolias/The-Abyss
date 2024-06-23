@@ -8,6 +8,8 @@ public class CubsRoot : MonoBehaviour
 
     [SerializeField] private CubsSpawner _cubsSpawner;
 
+    public CubsCounter CubsCounter => _cubsCounter;
+
     public void Initialize(int cubsCount)
     {
         _cubsCounter.Initialize(cubsCount);

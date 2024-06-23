@@ -7,14 +7,24 @@ public class Timer : MonoBehaviour, IChangable
 {
     private bool _isPause;
 
+    private Coroutine _currentTimer;
+
     public int MaxValue { get; private set; }
+
     public event Action<float> Changed;
+    public event Action Finished;
 
     public void Initialize(int maxTime)
     {
         MaxValue = maxTime;
-        
-        StartCoroutine(PlayTimer());
+
+        _currentTimer = StartCoroutine(PlayTimer());
+    }
+
+    public void Reset()
+    {
+        StopCoroutine(_currentTimer);
+        _isPause = false;
     }
 
     public void Pause()
@@ -46,5 +56,7 @@ public class Timer : MonoBehaviour, IChangable
                 timeLeft--;
             }
         }
+
+        Finished?.Invoke();
     }
 }

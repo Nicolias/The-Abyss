@@ -23,7 +23,7 @@ namespace SliderViewNameSpace
             OnInitialized();
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             _changable.Changed -= OnSliderChanged;
         }
