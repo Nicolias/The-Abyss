@@ -23,7 +23,7 @@ namespace Menu
             _wallet.Enable();
             _wallet.Accure(_moneyForAccure);
 
-            _shop.Initialize(_abilitiesConfig, _wallet);
+            _shop.Initialize(_wallet, _abilitiesConfig);
             _menuButtonsRoot.Initialize(_abilitiesConfig, _shop);
         }
 

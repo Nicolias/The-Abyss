@@ -5,12 +5,14 @@ using UnityEngine.UI;
 public class Shop : MonoBehaviour
 {
     [SerializeField] private Button _closeButton;
+    [SerializeField] private BuyPanel _buyPanel;
 
-    [SerializeField] private List<AbstractItem> _items = new List<AbstractItem>();
+    [SerializeField] private List<AbstractItemView> _items = new List<AbstractItemView>();
 
-    public void Initialize(AbilitiesConfig abilitiesConfig, WalletFacade walletFacade)
+    public void Initialize(WalletFacade walletFacade, AbilitiesConfig abilitiesConfig)
     {
-        _items.ForEach(item => item.Initialize(abilitiesConfig, walletFacade));
+        _buyPanel.Initialize(walletFacade);
+        _items.ForEach(item => item.Initialize(_buyPanel, abilitiesConfig));
     }
 
     private void OnEnable()

@@ -6,7 +6,15 @@ public class SpeedAbilitie : AbstractAbilitie
     [SerializeField] private HoleMovement _movement;
     [SerializeField] private float _speedFactor;
 
+    protected override AbstractItemModel Model { get; set; }
+
     protected override event Action EffectEnd;
+
+    public void Initialize(SpeedUpAbilityModel speedUpAbilityModel)
+    {
+        Model = speedUpAbilityModel;
+        OnInitialized();
+    }
 
     protected override void Enable()
     {

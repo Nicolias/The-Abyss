@@ -1,9 +1,11 @@
-﻿using System;
-using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
 
-public class AbilitiesConfig : IAbilitiesContainer
+public class AbilitiesConfig
 {
     private SaveLoader _saveLoader;
+
+    private List<AbstractItemModel> _items;
 
     public int SpeedAbilitieCount { get; private set; }
     public int ScaleAbilitieCount { get; private set; }
@@ -13,42 +15,16 @@ public class AbilitiesConfig : IAbilitiesContainer
     {
         _saveLoader = saveLoader;
 
-        SpeedAbilitieCount = saveLoader.LoadOrDefault(nameof(SpeedAbilitieCount));
-        ScaleAbilitieCount = saveLoader.LoadOrDefault(nameof(ScaleAbilitieCount));
-        FreezeTimeAbilitieCount = saveLoader.LoadOrDefault(nameof(FreezeTimeAbilitieCount));
+        _items = new List<AbstractItemModel>()
+        {
+            new SpeedUpAbilityModel(saveLoader),
+            new ScaleUpAbilityModel(saveLoader),
+            new FreezeTimeAbilityModel(saveLoader)
+        };
     }
 
-    public void Add(AbstractItem item, int amount)
+    public T GetModel<T>() where T : AbstractItemModel
     {
-        Add((dynamic)item, amount);
+        return _items.FirstOrDefault(ability => ability is T) as T;
     }
-
-    private void Add(SpeedItem speedTime, int amount)
-    {
-        if(amount < 0) 
-            throw new ArgumentOutOfRangeException();
-
-        SpeedAbilitieCount += amount;
-    }
-
-    private void Add(FreezeTimeItem freezeTimeItem, int amount)
-    {
-        if (amount < 0)
-            throw new ArgumentOutOfRangeException();
-
-        FreezeTimeAbilitieCount += amount;
-    }
-
-    private void Add(ScaleItem scaleItem, int amount)
-    {
-        if (amount < 0)
-            throw new ArgumentOutOfRangeException();
-
-        ScaleAbilitieCount += amount;
-    }
-}
-
-public interface IAbilitiesContainer
-{
-    void Add(AbstractItem item, int amount);
 }

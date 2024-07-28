@@ -12,8 +12,8 @@ public class AbilitiesRoot : MonoBehaviour
         if (abilitiesConfig == null)
             throw new NullReferenceException();
 
-        _freezeTimeAbilitie.Initialize(abilitiesConfig.FreezeTimeAbilitieCount);
-        _scaleAbilitie.Initialize(abilitiesConfig.ScaleAbilitieCount);
-        _speedAbilitie.Initialize(abilitiesConfig.SpeedAbilitieCount);
+        _freezeTimeAbilitie.Initialize(abilitiesConfig.GetModel<FreezeTimeAbilityModel>());
+        _scaleAbilitie.Initialize(abilitiesConfig.GetModel<ScaleUpAbilityModel>());
+        _speedAbilitie.Initialize(abilitiesConfig.GetModel<SpeedUpAbilityModel>());
     }
 }

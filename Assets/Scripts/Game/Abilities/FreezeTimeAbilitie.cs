@@ -5,7 +5,15 @@ public class FreezeTimeAbilitie : AbstractAbilitie
 {
     [SerializeField] private Timer _timer;
 
+    protected override AbstractItemModel Model { get; set; }
+
     protected override event Action EffectEnd;
+
+    public void Initialize(FreezeTimeAbilityModel timeAbilityModel)
+    {
+        Model = timeAbilityModel;
+        OnInitialized();
+    }
 
     protected override void Enable()
     {

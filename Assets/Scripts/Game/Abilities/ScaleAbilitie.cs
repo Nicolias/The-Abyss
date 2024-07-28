@@ -7,7 +7,15 @@ public class ScaleAbilitie : AbstractAbilitie
     [SerializeField] private ScalingObject _scalingObject;
     [SerializeField] private Vector3 _scaleFactor;
 
+    protected override AbstractItemModel Model { get; set; }
+
     protected override event Action EffectEnd;
+
+    public void Initialize(ScaleUpAbilityModel scaleUpAbilityModel)
+    {
+        Model = scaleUpAbilityModel;
+        OnInitialized();
+    }
 
     protected override void Enable()
     {
