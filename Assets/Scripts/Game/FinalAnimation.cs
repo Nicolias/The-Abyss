@@ -2,96 +2,71 @@
 using UnityEngine;
 using DG.Tweening;
 using System.Collections;
+using UnityEngine.UI;
+using System;
 
 public class FinalAnimation : MonoBehaviour
 {
     [SerializeField] private Transform _cameraPositionAndRotation;
-    [SerializeField] private List<Transform> _cubs;
-    [SerializeField] private float _force;
-    [SerializeField] private Heart _heart;
+    [SerializeField] private Heart _heartMap;
 
-    private int[,] _ints = new int[,]
-    {
-         { 0,0,0,2,2,2,2,2,0,0,0,0,2,2,2,2,2,0,0,0 },
-         { 0,0,2,2,1,1,1,2,2,0,0,2,2,1,1,1,2,2,0,0 },
-         { 0,2,2,1,1,1,1,1,2,2,2,2,1,1,1,1,1,2,2,0 },
-         { 2,2,1,1,1,1,1,1,1,2,2,1,1,1,1,1,1,1,2,2 },
-         { 2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2 },
-         { 2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2 },
-         { 2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2 },
-         { 2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2 },
-         { 2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2 },
-         { 0,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,0 },
-         { 0,0,2,2,1,1,1,1,1,1,1,1,1,1,1,1,2,2,0,0 },
-         { 0,0,0,2,2,1,1,1,1,1,1,1,1,1,1,2,2,0,0,0 },
-         { 0,0,0,0,2,2,1,1,1,1,1,1,1,1,2,2,0,0,0,0 },
-         { 0,0,0,0,0,2,2,1,1,1,1,1,1,2,2,0,0,0,0,0 },
-         { 0,0,0,0,0,0,2,2,1,1,1,1,2,2,0,0,0,0,0,0 },
-         { 0,0,0,0,0,0,0,2,2,1,1,2,2,0,0,0,0,0,0,0 },
-         { 0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0 },
-    };
+    [SerializeField] private Transform _startCubPosition;
+    [SerializeField] private float _force;
+    [SerializeField] private float _animationDuration;
+
+    [SerializeField] private Image _keepGoingImage;
+    [SerializeField] private Canvas _canvas;
+
+    private List<Transform> _cubs;
 
     private Camera _camera;
+
+    public event Action Complete;
 
     private void Awake()
     {
         _camera = Camera.main;
-        Show();
     }
 
-    public void Show()
+    public void Show(IEnumerable<Cub> cubs)
     {
+        _cubs = new List<Transform>();
         _camera.transform.SetParent(null);
+
+        foreach (var cub in cubs)
+        {
+            Transform cubTransform = cub.transform;
+            _cubs.Add(cubTransform);
+            cubTransform.position = _startCubPosition.position;
+        }
 
         _camera.transform.position = _cameraPositionAndRotation.position;
         _camera.transform.rotation = _cameraPositionAndRotation.rotation;
+
+        _keepGoingImage.gameObject.SetActive(true);
+        _keepGoingImage.transform.localPosition = new Vector3(_canvas.pixelRect.max.x, 0, 0);
 
         StartCoroutine(ShowQueue());
     }
 
     private IEnumerator ShowQueue()
     {
-        List<Vector3> postions = _heart.GetPositions();
+        List<Vector3> postions = _heartMap.GetPositions();
 
         for (int i = 0; i < _cubs.Count; i++)
         {
-            Sequence sequence = DOTween.Sequence();
-            _cubs[i].DOJump(postions[i] + new Vector3(0, 0.1f, 0), _force, 1, 3);
+            _cubs[i].DOJump(postions[i] + new Vector3(0, 0.1f, 0), _force, 1, _animationDuration);
+            _cubs[i].DORotate(new Vector3(0, 360 * 10, 360 * 10), _animationDuration, RotateMode.FastBeyond360);
+            _cubs[i].DORotate(Vector3.zero, 0);
 
-            sequence
-                .Append(_cubs[i].DOShakeRotation(2, new Vector3(90, 90, 0), 100, 360, true, ShakeRandomnessMode.Harmonic))
-                .Append(_cubs[i].DORotate(Vector3.zero, 0))
-                .Play();
-
-            if (i % 5 == 0)
-                yield return new WaitForSeconds(1f);
+            if (i != 0 && i % 5 == 0)
+                yield return new WaitForSeconds(0.5f);
         }
-    }
 
-    private void A()
-    {
-        //for (int i = 0; i < _ints.GetLength(0); i++)
-        //{
-        //    for (int k = 0; k < _ints.GetLength(1); k++)
-        //    {
-        //        Sequence sequence = DOTween.Sequence();
+        yield return new WaitForSeconds(_animationDuration);
 
-        //        if (_ints[i, k] == 0)
-        //            continue;
+        yield return _keepGoingImage.transform.DOLocalMove(new Vector3(0, 0, 0), _animationDuration / 2).WaitForCompletion();
 
-        //        if (_ints[i, k] == 2)
-        //        {
-        //            Rigidbody blacCub = Instantiate(_cubs[1]);
-        //            blacCub.transform.position = new Vector3(-k, blacCub.transform.position.y, -i);
-        //            continue;
-        //        }
-
-        //        Rigidbody cub = Instantiate(_cubs[0]);
-        //        cub.transform.position = new Vector3(-k, cub.transform.position.y, -i);
-
-        //        //cub.AddForce(new Vector3(0, 1, 0.3f) * _force);
-        //        //cub.transform.DOShakeRotation(3, new Vector3(90,90, 90), 30, 120, true, ShakeRandomnessMode.Harmonic);
-        //    }
-        //}
+        Complete?.Invoke();
     }
 }

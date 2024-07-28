@@ -1,9 +1,11 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Cub : MonoBehaviour
 {
     private Transform _transform;
     private GameObject _gameObject;
+    private Rigidbody _rigidbody;
     
     public Vector3 Position => _transform.position;
 
@@ -11,15 +13,16 @@ public class Cub : MonoBehaviour
     {
         _transform = transform;
         _gameObject = gameObject;
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     public void Enable()
     {
-        _gameObject.SetActive(true);
+        _rigidbody.isKinematic = false;
     }
     
     public void Disabel()
     {
-        _gameObject.SetActive(false);
+        _rigidbody.isKinematic = true;
     }
 }

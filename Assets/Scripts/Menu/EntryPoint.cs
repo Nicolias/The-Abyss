@@ -1,19 +1,29 @@
+using IJunior.TypedScenes;
 using UnityEngine;
 
 namespace Menu
 {
-    public class EntryPoint : MonoBehaviour
+    public class EntryPoint : MonoBehaviour, ISceneLoadHandler<int>
     {
         [SerializeField] private Shop _shop;
         [SerializeField] private MenuButtonsRoot _menuButtonsRoot;
+        [SerializeField] private WalletFacade _wallet;
 
         private AbilitiesConfig _abilitiesConfig;
 
+        private int _moneyForAccure;
+
         private void Awake()
         {
-            _abilitiesConfig = new AbilitiesConfig();
+            SaveLoader saveLoader = new SaveLoader();
 
-            _shop.Initialize(_abilitiesConfig);
+            _abilitiesConfig = new AbilitiesConfig(saveLoader);
+
+            _wallet.Initialize(saveLoader);
+            _wallet.Enable();
+            _wallet.Accure(_moneyForAccure);
+
+            _shop.Initialize(_abilitiesConfig, _wallet);
             _menuButtonsRoot.Initialize(_abilitiesConfig, _shop);
         }
 
@@ -25,6 +35,12 @@ namespace Menu
         private void OnDisable()
         {
             _menuButtonsRoot.Disable();
+            _wallet.Disable();
+        }
+
+        public void OnSceneLoaded(int collectedMoney)
+        {
+            _moneyForAccure = collectedMoney;
         }
     }
 }

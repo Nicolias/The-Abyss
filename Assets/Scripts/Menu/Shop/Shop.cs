@@ -8,9 +8,9 @@ public class Shop : MonoBehaviour
 
     [SerializeField] private List<AbstractItem> _items = new List<AbstractItem>();
 
-    public void Initialize(AbilitiesConfig abilitiesConfig)
+    public void Initialize(AbilitiesConfig abilitiesConfig, WalletFacade walletFacade)
     {
-        _items.ForEach(item => item.Initialize(abilitiesConfig));
+        _items.ForEach(item => item.Initialize(abilitiesConfig, walletFacade));
     }
 
     private void OnEnable()

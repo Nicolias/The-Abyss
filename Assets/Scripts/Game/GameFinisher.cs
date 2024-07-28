@@ -25,12 +25,14 @@ public class GameFinisher : MonoBehaviour
     {
         _cubsCounter.Changed += OnChanged;
         _timer.Finished += FinishGame;
+        _finalAnimation.Complete += OnComplete;
     }
 
     public void Disable()
     {
         _cubsCounter.Changed -= OnChanged;
         _timer.Finished -= FinishGame;
+        _finalAnimation.Complete -= OnComplete;
     }
 
     private void OnChanged(float currentCubs)
@@ -44,7 +46,12 @@ public class GameFinisher : MonoBehaviour
     private void FinishGame()
     {
         _timer.Reset();
-        _finalAnimation.Show();
+        _finalAnimation.Show(_cubsCounter.CollectedCubs);
         _ui.SetActive(false);
+    }
+
+    private void OnComplete()
+    {
+        IJunior.TypedScenes.Menu.Load(_cubsCounter.Value);
     }
 }

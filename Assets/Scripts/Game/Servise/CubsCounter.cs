@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using SliderViewNameSpace;
 using UnityEngine;
 
@@ -6,15 +8,18 @@ public class CubsCounter : MonoBehaviour, IChangable
 {
     [SerializeField] private HoleCollider _holeCollider;
 
-    private int _collected = 0;
+    private List<Cub> _collectedCubs = new List<Cub>();
     
+    public IEnumerable<Cub> CollectedCubs => _collectedCubs;
+
+    public int Value => _collectedCubs.Count;
     public int MaxValue { get; private set; }
 
     public event Action<float> Changed;
 
     public void Initialize(int cubsCount)
     {
-        _collected = 0;
+        _collectedCubs.Clear();
         MaxValue = cubsCount;
     }
 
@@ -31,7 +36,7 @@ public class CubsCounter : MonoBehaviour, IChangable
     private void OnCollected(Cub cub)
     {
         cub.Disabel();
-        _collected++;
-        Changed?.Invoke(_collected);
+        _collectedCubs.Add(cub);
+        Changed?.Invoke(_collectedCubs.Count);
     }
 }

@@ -3,33 +3,24 @@ using UnityEngine;
 
 public class AbilitiesConfig : IAbilitiesContainer
 {
+    private SaveLoader _saveLoader;
+
     public int SpeedAbilitieCount { get; private set; }
     public int ScaleAbilitieCount { get; private set; }
     public int FreezeTimeAbilitieCount { get; private set; }
 
-    public void Initialize(int speedAbilitieCount, int scaleAbilitieCount, int freezeTimeAbilitieCount)
+    public AbilitiesConfig(SaveLoader saveLoader)
     {
-        if (speedAbilitieCount < 0)
-            throw new ArgumentOutOfRangeException();
+        _saveLoader = saveLoader;
 
-        if (scaleAbilitieCount < 0)
-            throw new ArgumentOutOfRangeException();
-
-        if (freezeTimeAbilitieCount < 0)
-            throw new ArgumentOutOfRangeException();
-
-        SpeedAbilitieCount = speedAbilitieCount;
-        ScaleAbilitieCount = scaleAbilitieCount;
-        FreezeTimeAbilitieCount = freezeTimeAbilitieCount;
+        SpeedAbilitieCount = saveLoader.LoadOrDefault(nameof(SpeedAbilitieCount));
+        ScaleAbilitieCount = saveLoader.LoadOrDefault(nameof(ScaleAbilitieCount));
+        FreezeTimeAbilitieCount = saveLoader.LoadOrDefault(nameof(FreezeTimeAbilitieCount));
     }
 
     public void Add(AbstractItem item, int amount)
     {
         Add((dynamic)item, amount);
-
-        Debug.Log(SpeedAbilitieCount);
-        Debug.Log(ScaleAbilitieCount);
-        Debug.Log(FreezeTimeAbilitieCount);
     }
 
     private void Add(SpeedItem speedTime, int amount)

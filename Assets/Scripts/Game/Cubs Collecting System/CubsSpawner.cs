@@ -30,7 +30,8 @@ public class CubsSpawner : MonoBehaviour
         {
             for (int j = 0; j < _cubsCountPerRow; j++)
             {
-                Instantiate(_template, new Vector3(xSpawnPosition, _firstCubSpawnPosition.y, ySpawnPosition), Quaternion.identity, _transform);
+                Cub cub = Instantiate(_template, new Vector3(xSpawnPosition, _firstCubSpawnPosition.y, ySpawnPosition), Quaternion.identity, _transform);
+                cub.Enable();
                 xSpawnPosition += _xSpacing;
             }
 
