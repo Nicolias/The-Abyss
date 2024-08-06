@@ -9,9 +9,9 @@ public class FreezeTimeAbilitie : AbstractAbilitie
 
     protected override event Action EffectEnd;
 
-    public void Initialize(FreezeTimeAbilityModel timeAbilityModel)
+    public void Initialize()
     {
-        Model = timeAbilityModel;
+        //Model = timeAbilityModel;
         OnInitialized();
     }
 

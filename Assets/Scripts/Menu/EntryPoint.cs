@@ -1,4 +1,5 @@
 using IJunior.TypedScenes;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Menu
@@ -9,6 +10,8 @@ namespace Menu
         [SerializeField] private MenuButtonsRoot _menuButtonsRoot;
         [SerializeField] private WalletFacade _wallet;
 
+        [SerializeField] private List<ItemData> _items;
+
         private AbilitiesConfig _abilitiesConfig;
 
         private int _moneyForAccure;
@@ -17,7 +20,7 @@ namespace Menu
         {
             SaveLoader saveLoader = new SaveLoader();
 
-            _abilitiesConfig = new AbilitiesConfig(saveLoader);
+            _abilitiesConfig = new AbilitiesConfig(saveLoader, _items);
 
             _wallet.Initialize(saveLoader);
             _wallet.Enable();

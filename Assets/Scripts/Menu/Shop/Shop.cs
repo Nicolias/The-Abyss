@@ -7,12 +7,18 @@ public class Shop : MonoBehaviour
     [SerializeField] private Button _closeButton;
     [SerializeField] private BuyPanel _buyPanel;
 
-    [SerializeField] private List<AbstractItemView> _items = new List<AbstractItemView>();
+    [SerializeField] private List<AbstractItemView> _items;
 
     public void Initialize(WalletFacade walletFacade, AbilitiesConfig abilitiesConfig)
     {
         _buyPanel.Initialize(walletFacade);
-        _items.ForEach(item => item.Initialize(_buyPanel, abilitiesConfig));
+
+        List<AbstractItemModel> itemsModel = new List<AbstractItemModel>(abilitiesConfig.Items);
+
+        for (int i = 0; i < itemsModel.Count; i++)
+        {
+            _items[i].Initialize(_buyPanel, itemsModel[i]);
+        }
     }
 
     private void OnEnable()

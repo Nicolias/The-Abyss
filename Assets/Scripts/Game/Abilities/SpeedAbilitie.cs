@@ -10,9 +10,9 @@ public class SpeedAbilitie : AbstractAbilitie
 
     protected override event Action EffectEnd;
 
-    public void Initialize(SpeedUpAbilityModel speedUpAbilityModel)
+    public void Initialize()
     {
-        Model = speedUpAbilityModel;
+       // Model = speedUpAbilityModel;
         OnInitialized();
     }
 

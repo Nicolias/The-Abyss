@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 public class AbilitiesConfig
 {
@@ -7,24 +6,16 @@ public class AbilitiesConfig
 
     private List<AbstractItemModel> _items;
 
-    public int SpeedAbilitieCount { get; private set; }
-    public int ScaleAbilitieCount { get; private set; }
-    public int FreezeTimeAbilitieCount { get; private set; }
+    public IEnumerable<AbstractItemModel> Items => _items;
 
-    public AbilitiesConfig(SaveLoader saveLoader)
+    public AbilitiesConfig(SaveLoader saveLoader, List<ItemData> items)
     {
         _saveLoader = saveLoader;
+        _items = new List<AbstractItemModel>();
 
-        _items = new List<AbstractItemModel>()
+        for (int i = 0; i < items.Count; i++)
         {
-            new SpeedUpAbilityModel(saveLoader),
-            new ScaleUpAbilityModel(saveLoader),
-            new FreezeTimeAbilityModel(saveLoader)
-        };
-    }
-
-    public T GetModel<T>() where T : AbstractItemModel
-    {
-        return _items.FirstOrDefault(ability => ability is T) as T;
+            _items.Add(new AbstractItemModel(saveLoader, items[i]));
+        }
     }
 }

@@ -11,9 +11,9 @@ public class ScaleAbilitie : AbstractAbilitie
 
     protected override event Action EffectEnd;
 
-    public void Initialize(ScaleUpAbilityModel scaleUpAbilityModel)
+    public void Initialize()
     {
-        Model = scaleUpAbilityModel;
+        //Model = scaleUpAbilityModel;
         OnInitialized();
     }
 

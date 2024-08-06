@@ -6,24 +6,31 @@ using UnityEngine.UI;
 public abstract class AbstractItemView : MonoBehaviour
 {
     [SerializeField] private Button _button;
-    [SerializeField] private int _price;
-
     [SerializeField] private TMP_Text _countText;
+
+    [SerializeField] private TMP_Text _price;
+    [SerializeField] private TMP_Text _name;
+    [SerializeField] private Image _image;
 
     private AbstractItemModel _model;
 
     private BuyPanel _buyPanel;
 
-    public void Initialize(BuyPanel buyPanel, AbilitiesConfig abilitiesConfig)
+    public void Initialize(BuyPanel buyPanel, AbstractItemModel model)
     {
         if (buyPanel == null)
             throw new ArgumentNullException();
 
-        if (abilitiesConfig == null)
+        if (model == null)
             throw new ArgumentNullException();
 
         _buyPanel = buyPanel;
-        _model = GetModel(abilitiesConfig);
+        _model = model;
+
+        _name.text = _model.Data.Name;
+        _price.text = _model.Data.Price.ToString();
+        _image.sprite = _model.Data.Sprite;
+
         OnChanged();
     }
 
@@ -39,7 +46,7 @@ public abstract class AbstractItemView : MonoBehaviour
         _model.Changed -= OnChanged;
     }
 
-    protected abstract AbstractItemModel GetModel(AbilitiesConfig abilitiesConfig);
+    protected abstract AbstractItemModel GetModel(AbilitiesConfig abilitiesConfig, int price, string name);
 
     private void OnClicked()
     {

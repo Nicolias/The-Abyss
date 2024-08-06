@@ -1,24 +1,29 @@
 using System;
 
-public abstract class AbstractItemModel
+public class AbstractItemModel
 {
     private SaveLoader _loader;
 
-    public AbstractItemModel(SaveLoader loader)
+    public AbstractItemModel(SaveLoader loader, ItemData data)
     {
         if(loader == null)
             throw new ArgumentNullException();
 
+        if(data != null) 
+            throw new ArgumentOutOfRangeException();
+
         _loader = loader;
-        Count = loader.LoadOrDefault(Id);
     }
 
-    protected abstract string Id { get; }
-
     public int Count { get; private set; }
-    public abstract int Price { get; }
+    public ItemData Data { get; private set; }
 
     public event Action Changed;
+
+    public void Enable()
+    {
+        Count = _loader.LoadOrDefault(Data.ID);
+    }
 
     public void Add()
     {
@@ -40,40 +45,6 @@ public abstract class AbstractItemModel
 
     private void Save()
     {
-        _loader.Save(Id, Count);
+        _loader.Save(Data.ID, Count);
     }
-}
-
-public class SpeedUpAbilityModel : AbstractItemModel
-{
-    public SpeedUpAbilityModel(SaveLoader loader) : base(loader)
-    {
-    }
-
-    protected override string Id => nameof(SpeedUpAbilityModel);
-
-    public override int Price => 100;
-}
-
-public class FreezeTimeAbilityModel : AbstractItemModel
-{
-    public FreezeTimeAbilityModel(SaveLoader loader) : base(loader)
-    {
-    }
-
-    protected override string Id => nameof(FreezeTimeAbilityModel);
-
-    public override int Price => 100;
-}
-
-public class ScaleUpAbilityModel : AbstractItemModel
-{
-    public ScaleUpAbilityModel(SaveLoader loader) : base(loader)
-    {
-    }
-
-    protected override string Id => nameof(ScaleUpAbilityModel);
-
-    public override int Price => 100;
-
 }

@@ -1,10 +1,14 @@
-using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BuyPanel : MonoBehaviour
 {
     [SerializeField] private Button _buyButton;
+
+    [SerializeField] private TMP_Text _itemNameText;
+    [SerializeField] private TMP_Text _itemPriceText;
+    [SerializeField] private Image _itemImage;
 
     private WalletFacade _wallet;
 
@@ -29,13 +33,17 @@ public class BuyPanel : MonoBehaviour
     {
         _currentItem = item;
         gameObject.SetActive(true);
+
+        _itemNameText.text = item.Data.Name;
+        _itemPriceText.text = item.Data.Price.ToString();
+        _itemImage.sprite = item.Data.Sprite;
     }
 
     private void TryBuy()
     {
-        if (_wallet.Value >= _currentItem.Price)
+        if (_wallet.Value >= _currentItem.Data.Price)
         {
-            _wallet.Spent(_currentItem.Price);
+            _wallet.Spent(_currentItem.Data.Price);
             _currentItem.Add();
         }
 
