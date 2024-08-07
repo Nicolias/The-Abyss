@@ -1,19 +1,19 @@
 ﻿using System;
 using UnityEngine;
 
-public class SpeedAbilitie : AbstractAbilitie
+public class SpeedAbilitie : AbilityView
 {
     [SerializeField] private HoleMovement _movement;
     [SerializeField] private float _speedFactor;
 
-    protected override AbstractItemModel Model { get; set; }
+   // protected override ItemModel Model { get; set; }
 
     protected override event Action EffectEnd;
 
     public void Initialize()
     {
        // Model = speedUpAbilityModel;
-        OnInitialized();
+        //UpdateCounText();
     }
 
     protected override void Enable()

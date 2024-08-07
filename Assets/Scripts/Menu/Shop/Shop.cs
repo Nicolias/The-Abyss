@@ -1,24 +1,18 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
-    [SerializeField] private Button _closeButton;
     [SerializeField] private BuyPanel _buyPanel;
+    [SerializeField] private ItemsViewFactory _itemsViewFactory;
 
-    [SerializeField] private List<AbstractItemView> _items;
+    [SerializeField] private Button _closeButton;
 
     public void Initialize(WalletFacade walletFacade, AbilitiesConfig abilitiesConfig)
     {
         _buyPanel.Initialize(walletFacade);
 
-        List<AbstractItemModel> itemsModel = new List<AbstractItemModel>(abilitiesConfig.Items);
-
-        for (int i = 0; i < itemsModel.Count; i++)
-        {
-            _items[i].Initialize(_buyPanel, itemsModel[i]);
-        }
+        _itemsViewFactory.Initialize(abilitiesConfig.Items, _buyPanel);
     }
 
     private void OnEnable()

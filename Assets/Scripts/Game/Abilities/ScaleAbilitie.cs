@@ -2,19 +2,19 @@ using ScalingSystem;
 using System;
 using UnityEngine;
 
-public class ScaleAbilitie : AbstractAbilitie
+public class ScaleAbilitie : AbilityView
 {
     [SerializeField] private ScalingObject _scalingObject;
     [SerializeField] private Vector3 _scaleFactor;
 
-    protected override AbstractItemModel Model { get; set; }
+    //protected override ItemModel Model { get; set; }
 
     protected override event Action EffectEnd;
 
     public void Initialize()
     {
         //Model = scaleUpAbilityModel;
-        OnInitialized();
+       // UpdateCounText();
     }
 
     protected override void Enable()

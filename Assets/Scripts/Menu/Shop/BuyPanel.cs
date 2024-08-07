@@ -10,9 +10,11 @@ public class BuyPanel : MonoBehaviour
     [SerializeField] private TMP_Text _itemPriceText;
     [SerializeField] private Image _itemImage;
 
+    [SerializeField] private GameObject _notEnoughMoneyPanel;
+
     private WalletFacade _wallet;
 
-    private AbstractItemModel _currentItem;
+    private ItemModel _currentItem;
 
     public void Initialize(WalletFacade walletFacade)
     {
@@ -29,7 +31,7 @@ public class BuyPanel : MonoBehaviour
         _buyButton.onClick.RemoveListener(TryBuy);
     }
 
-    public void Open(AbstractItemModel item)
+    public void Open(ItemModel item)
     {
         _currentItem = item;
         gameObject.SetActive(true);
@@ -45,6 +47,10 @@ public class BuyPanel : MonoBehaviour
         {
             _wallet.Spent(_currentItem.Data.Price);
             _currentItem.Add();
+        }
+        else
+        {
+            _notEnoughMoneyPanel.SetActive(true);
         }
 
         gameObject.SetActive(false);

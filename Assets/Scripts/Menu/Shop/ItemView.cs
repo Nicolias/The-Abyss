@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class AbstractItemView : MonoBehaviour
+public class ItemView : MonoBehaviour
 {
     [SerializeField] private Button _button;
     [SerializeField] private TMP_Text _countText;
@@ -12,11 +12,11 @@ public abstract class AbstractItemView : MonoBehaviour
     [SerializeField] private TMP_Text _name;
     [SerializeField] private Image _image;
 
-    private AbstractItemModel _model;
+    private ItemModel _model;
 
     private BuyPanel _buyPanel;
 
-    public void Initialize(BuyPanel buyPanel, AbstractItemModel model)
+    public void Initialize(BuyPanel buyPanel, ItemModel model)
     {
         if (buyPanel == null)
             throw new ArgumentNullException();
@@ -45,8 +45,6 @@ public abstract class AbstractItemView : MonoBehaviour
         _button.onClick.RemoveListener(OnClicked);
         _model.Changed -= OnChanged;
     }
-
-    protected abstract AbstractItemModel GetModel(AbilitiesConfig abilitiesConfig, int price, string name);
 
     private void OnClicked()
     {

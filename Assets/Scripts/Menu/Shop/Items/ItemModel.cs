@@ -1,18 +1,19 @@
 using System;
 
-public class AbstractItemModel
+public class ItemModel
 {
     private SaveLoader _loader;
 
-    public AbstractItemModel(SaveLoader loader, ItemData data)
+    public ItemModel(SaveLoader loader, ItemData data)
     {
         if(loader == null)
-            throw new ArgumentNullException();
+            throw new NullReferenceException();
 
-        if(data != null) 
-            throw new ArgumentOutOfRangeException();
+        if(data == null) 
+            throw new NullReferenceException();
 
         _loader = loader;
+        Data = data;
     }
 
     public int Count { get; private set; }

@@ -1,21 +1,32 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 public class AbilitiesConfig
 {
-    private SaveLoader _saveLoader;
+    private List<ItemModel> _itemsModel;
 
-    private List<AbstractItemModel> _items;
+    public IEnumerable<ItemModel> Items => _itemsModel;
 
-    public IEnumerable<AbstractItemModel> Items => _items;
-
-    public AbilitiesConfig(SaveLoader saveLoader, List<ItemData> items)
+    public AbilitiesConfig(SaveLoader saveLoader, List<ItemData> itemsData)
     {
-        _saveLoader = saveLoader;
-        _items = new List<AbstractItemModel>();
+        if (saveLoader == null)
+            throw new NullReferenceException();
 
-        for (int i = 0; i < items.Count; i++)
+        if(itemsData == null)
+            throw new NullReferenceException();
+
+        foreach (var item in itemsData)
+            if (item == null)
+                throw new NullReferenceException();
+
+        _itemsModel = new List<ItemModel>();
+
+        for (int i = 0; i < itemsData.Count; i++)
         {
-            _items.Add(new AbstractItemModel(saveLoader, items[i]));
+            ItemModel newItem = new ItemModel(saveLoader, itemsData[i]);
+
+            newItem.Enable();
+            _itemsModel.Add(newItem);
         }
     }
 }

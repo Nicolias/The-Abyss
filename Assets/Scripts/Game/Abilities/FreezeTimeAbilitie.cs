@@ -1,18 +1,18 @@
 ﻿using System;
 using UnityEngine;
 
-public class FreezeTimeAbilitie : AbstractAbilitie
+public class FreezeTimeAbilitie : AbilityView
 {
     [SerializeField] private Timer _timer;
 
-    protected override AbstractItemModel Model { get; set; }
+    //protected override ItemModel Model { get; set; }
 
     protected override event Action EffectEnd;
 
     public void Initialize()
     {
         //Model = timeAbilityModel;
-        OnInitialized();
+       // UpdateCounText();
     }
 
     protected override void Enable()
