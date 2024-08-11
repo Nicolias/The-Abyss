@@ -9,6 +9,7 @@ public class EntryPoint : MonoBehaviour, ISceneLoadHandler<GameConfig>
     [SerializeField] private TimerRoot _timerRoot;
 
     [SerializeField] private GameFinisher _gameFinisher;
+    [SerializeField] private CoroutineServise _coroutineServise;
 
     public void OnSceneLoaded(GameConfig argument)
     {
@@ -17,7 +18,7 @@ public class EntryPoint : MonoBehaviour, ISceneLoadHandler<GameConfig>
 
         _cubsRoot.Initialize(argument.CubsCount);
         _timerRoot.Initialize(argument.TimerValue);
-        _abilitiesRoot.Initialize(argument.Abilities);
+        _abilitiesRoot.Initialize(argument.Abilities, _coroutineServise);
 
         _gameFinisher.Initialize(_timerRoot.Timer, _cubsRoot.CubsCounter);
     }

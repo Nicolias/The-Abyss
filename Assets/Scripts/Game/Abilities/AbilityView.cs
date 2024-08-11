@@ -1,29 +1,17 @@
 ﻿using System;
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public abstract class AbilityView : MonoBehaviour
+public class AbilityView : MonoBehaviour
 {
     [SerializeField] private TMP_Text _count;
+    [SerializeField] private Image _icon;
 
     private Button _button;
-    private WaitForSeconds _waitForSeconds;
 
-    private ItemModel _model;
-
-    protected abstract event Action EffectEnd;
-
-    public int Count => _model.Count;
-
-    public void Initialize(ItemModel model)
-    {
-        _waitForSeconds = new WaitForSeconds(model.Data.EffectDuration);
-        _model = model;
-        UpdateCounText();
-    }
+    public event Action Clicked;
 
     private void Awake()
     {
@@ -32,48 +20,40 @@ public abstract class AbilityView : MonoBehaviour
 
     private void OnEnable()
     {
-        _button.onClick.AddListener(UseAbilitie);
-        EffectEnd += OnEffectEnd;
-
-        if (Count == 0)
-            _button.interactable = false;
+        _button.onClick.AddListener(OnClick);
     }
 
     private void OnDisable()
     {
-        _button.onClick.RemoveListener(UseAbilitie);
-        EffectEnd -= OnEffectEnd;
+        _button.onClick.RemoveListener(OnClick);
     }
 
-    private void UpdateCounText()
+    public void Initialize(ItemModel model)
     {
-        _count.text = Count.ToString();
+        if (model == null)
+            throw new ArgumentNullException();
+
+        UpdateCountText(model.Count);
+        _icon.sprite = model.Data.Sprite;
     }
 
-    protected abstract void Enable();
-    protected abstract void Disable();
-
-    private void UseAbilitie()
+    public void UpdateCountText(int count)
     {
-        if (Count == 0)
-            return;
+        _count.text = count.ToString();
+    }
 
-        _model.Remove();
+    public void Enable()
+    {
+        _button.interactable = true;
+    }
+
+    public void Disable()
+    {
         _button.interactable = false;
-        UpdateCounText();
-
-        StartCoroutine(StartAbilitie());
     }
 
-    private IEnumerator StartAbilitie()
+    private void OnClick()
     {
-        Enable();
-        yield return _waitForSeconds;
-        Disable();
-    }
-
-    private void OnEffectEnd()
-    {
-        _button.interactable = Count > 0;
+        Clicked?.Invoke();
     }
 }

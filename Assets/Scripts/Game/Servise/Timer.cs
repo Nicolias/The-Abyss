@@ -32,7 +32,7 @@ public class Timer : MonoBehaviour, IChangable
         _isPause = true;
     }
 
-    public void UnPause()
+    public void Play()
     {
         _isPause = false;
     }

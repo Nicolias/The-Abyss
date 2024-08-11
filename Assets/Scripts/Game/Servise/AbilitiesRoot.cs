@@ -3,17 +3,26 @@ using UnityEngine;
 
 public class AbilitiesRoot : MonoBehaviour
 {
-    [SerializeField] private FreezeTimeAbilitie _freezeTimeAbilitie;
-    [SerializeField] private ScaleAbilitie _scaleAbilitie;
-    [SerializeField] private SpeedAbilitie _speedAbilitie;
+    [SerializeField] private AbilityRouter _abilityRouter;
 
-    public void Initialize(AbilitiesConfig abilitiesConfig)
+    public void Initialize(AbilitiesConfig abilitiesConfig, CoroutineServise coroutineServise)
     {
         if (abilitiesConfig == null)
             throw new NullReferenceException();
 
-        //_freezeTimeAbilitie.Initialize(abilitiesConfig.GetModel<FreezeTimeAbilityModel>());
-        //_scaleAbilitie.Initialize(abilitiesConfig.GetModel<ScaleUpAbilityModel>());
-        //_speedAbilitie.Initialize(abilitiesConfig.GetModel<SpeedUpAbilityModel>());
+        if (coroutineServise == null)
+            throw new NullReferenceException();
+
+        _abilityRouter.Initialize(abilitiesConfig.Items, coroutineServise);
+    }
+
+    private void OnEnable()
+    {
+        _abilityRouter.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _abilityRouter.Disable();
     }
 }

@@ -30,4 +30,9 @@ public class HoleMovement : MonoBehaviour
 
         _speed /= speedFactor;
     }
+
+    internal void AddSpeed(object value)
+    {
+        throw new NotImplementedException();
+    }
 }
