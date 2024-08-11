@@ -17,3 +17,5 @@ MonoBehaviour:
   <Name>k__BackingField: Scale up
   <Price>k__BackingField: 50
   <ID>k__BackingField: 1
+  <EffectDuration>k__BackingField: 10
+  <Value>k__BackingField: {x: 0, y: 0, z: 0}

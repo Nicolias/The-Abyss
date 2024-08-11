@@ -17,3 +17,5 @@ MonoBehaviour:
   <Name>k__BackingField: Speed up
   <Price>k__BackingField: 50
   <ID>k__BackingField: 2
+  <EffectDuration>k__BackingField: 5
+  <Value>k__BackingField: 10

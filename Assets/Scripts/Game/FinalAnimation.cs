@@ -15,6 +15,7 @@ public class FinalAnimation : MonoBehaviour
     [SerializeField] private float _animationDuration;
 
     [SerializeField] private Image _keepGoingImage;
+    [SerializeField] private RectTransform _keepGoingRect;
     [SerializeField] private Canvas _canvas;
 
     private List<Transform> _cubs;
@@ -44,7 +45,7 @@ public class FinalAnimation : MonoBehaviour
         _camera.transform.rotation = _cameraPositionAndRotation.rotation;
 
         _keepGoingImage.gameObject.SetActive(true);
-        _keepGoingImage.transform.localPosition = new Vector3(_canvas.pixelRect.max.x, 0, 0);
+        _keepGoingImage.transform.localPosition = new Vector3(_keepGoingRect.rect.width, 0, 0);
 
         StartCoroutine(ShowQueue());
     }
@@ -59,7 +60,7 @@ public class FinalAnimation : MonoBehaviour
             _cubs[i].DORotate(new Vector3(0, 360 * 10, 360 * 10), _animationDuration, RotateMode.FastBeyond360);
             _cubs[i].DORotate(Vector3.zero, 0);
 
-            if (i != 0 && i % 5 == 0)
+            if (i != 0 && i % 10 == 0)
                 yield return new WaitForSeconds(0.5f);
         }
 
