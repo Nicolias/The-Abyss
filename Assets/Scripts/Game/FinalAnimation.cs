@@ -38,6 +38,7 @@ public class FinalAnimation : MonoBehaviour
         {
             Transform cubTransform = cub.transform;
             _cubs.Add(cubTransform);
+            cub.gameObject.SetActive(true);
             cubTransform.position = _startCubPosition.position;
         }
 

@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 6626829069244786119}
   - component: {fileID: 8204156598665815479}
   - component: {fileID: 5913206486959218835}
+  - component: {fileID: 7277529300547596483}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -190,7 +191,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 7
+  m_AdditionalShaderChannelsFlag: 27
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -212,6 +213,26 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7277529300547596483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4806470667767051098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3122b5ae6d0b77943abc749e1c36f1c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cameraPositionAndRotation: {fileID: 0}
+  _heartMap: {fileID: 0}
+  _startCubPosition: {fileID: 0}
+  _force: 20
+  _animationDuration: 2
+  _keepGoingImage: {fileID: 554382857810775392}
+  _keepGoingRect: {fileID: 6955567724965625477}
+  _canvas: {fileID: 8204156598665815479}
 --- !u!1 &7145055157666604930
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,7 +250,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6955567724965625477
 RectTransform:
   m_ObjectHideFlags: 0

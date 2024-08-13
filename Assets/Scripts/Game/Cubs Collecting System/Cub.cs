@@ -24,5 +24,6 @@ public class Cub : MonoBehaviour
     public void Disabel()
     {
         _rigidbody.isKinematic = true;
+        gameObject.SetActive(false);
     }
 }
