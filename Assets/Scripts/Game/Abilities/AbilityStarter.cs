@@ -2,11 +2,6 @@ using ScalingSystem;
 
 public class AbilityStarter : AbilityVisitor
 {
-    public override void Visit(ItemData item)
-    {
-        Visit((dynamic)item);
-    }
-
     public override void Visit(FreezTime freezTime)
     {
         Timer.Pause();

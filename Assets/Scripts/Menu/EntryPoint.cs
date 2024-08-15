@@ -1,4 +1,7 @@
+using Agava.YandexGames;
 using IJunior.TypedScenes;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +12,7 @@ namespace Menu
         [SerializeField] private Shop _shop;
         [SerializeField] private MenuButtonsRoot _menuButtonsRoot;
         [SerializeField] private WalletFacade _wallet;
+        [SerializeField] private YandexLeaderboard _leaderboard;
 
         [SerializeField] private List<ItemData> _items;
 
@@ -27,12 +31,25 @@ namespace Menu
             _wallet.Accure(_moneyForAccure);
 
             _shop.Initialize(_wallet, _abilitiesConfig);
-            _menuButtonsRoot.Initialize(_abilitiesConfig, _shop);
+            _menuButtonsRoot.Initialize(_abilitiesConfig, _shop, _leaderboard);
         }
 
         private void OnEnable()
         {
             _menuButtonsRoot.Enable();
+        }
+
+        private IEnumerator Start()
+        {
+#if UNITY_WEBGL && !UNITY_EDITOR
+            yield return YandexGamesSdk.Initialize();
+
+                    YandexGamesSdk.GameReady();
+
+                    if (PlayerAccount.IsAuthorized == false)
+                        PlayerAccount.StartAuthorizationPolling(1500);
+#endif
+            yield return null;
         }
 
         private void OnDisable()
@@ -44,6 +61,7 @@ namespace Menu
         public void OnSceneLoaded(int collectedMoney)
         {
             _moneyForAccure = collectedMoney;
+            _leaderboard.SetPlayerScore(collectedMoney);
         }
     }
 }

@@ -4,4 +4,9 @@
 public class ScaleUp : ItemData
 {
     [field: SerializeField] public Vector3 Value { get; private set; }
+
+    public override void Accept(AbilityVisitor abilityVisitor)
+    {
+        abilityVisitor.Visit(this);
+    }
 }
