@@ -6,6 +6,8 @@ public class GameFinisher : MonoBehaviour
     [SerializeField] private FinalAnimation _finalAnimation;
     [SerializeField] private GameObject _ui;
 
+    [SerializeField] private EndGameAdPanel _endGameAdPanel;
+
     private Timer _timer;
     private CubsCounter _cubsCounter;
 
@@ -23,19 +25,31 @@ public class GameFinisher : MonoBehaviour
 
     public void Enbale()
     {
-        _cubsCounter.Changed += OnChanged;
+        _cubsCounter.Changed += OnScoreChanged;
         _timer.Finished += FinishGame;
-        _finalAnimation.Complete += OnComplete;
+        _finalAnimation.Complete += OnFinalAnimationComplete;
     }
 
     public void Disable()
     {
-        _cubsCounter.Changed -= OnChanged;
+        _cubsCounter.Changed -= OnScoreChanged;
         _timer.Finished -= FinishGame;
-        _finalAnimation.Complete -= OnComplete;
+        _finalAnimation.Complete -= OnFinalAnimationComplete;
     }
 
-    private void OnChanged(float currentCubs)
+    private void FinishGame()
+    {
+        _timer.Reset();
+        _ui.SetActive(false);
+        _endGameAdPanel.Open(_cubsCounter.Value, ShowFinalAnimation);
+    }
+
+    private void ShowFinalAnimation()
+    {
+        _finalAnimation.Show(_cubsCounter.CollectedCubs);
+    }
+
+    private void OnScoreChanged(float currentCubs)
     {
         if (currentCubs != _cubsCounter.MaxValue)
             return;
@@ -43,14 +57,7 @@ public class GameFinisher : MonoBehaviour
         FinishGame();
     }
 
-    private void FinishGame()
-    {
-        _timer.Reset();
-        _finalAnimation.Show(_cubsCounter.CollectedCubs);
-        _ui.SetActive(false);
-    }
-
-    private void OnComplete()
+    private void OnFinalAnimationComplete()
     {
         IJunior.TypedScenes.Menu.Load(_cubsCounter.Value);
     }

@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Menu
 {
@@ -17,19 +18,22 @@ namespace Menu
         [SerializeField] private List<ItemData> _items;
 
         private AbilitiesConfig _abilitiesConfig;
+        private SaveLoader _saveLoader;
 
-        private int _moneyForAccure;
+        [Inject]
+        public void Cunstruct(SaveLoader saveLoader)
+        {
+            if (saveLoader == null)
+                throw new NullReferenceException();
+
+            _saveLoader = saveLoader;
+        }
 
         private void Awake()
         {
-            SaveLoader saveLoader = new SaveLoader();
+            _abilitiesConfig = new AbilitiesConfig(_saveLoader, _items);
 
-            _abilitiesConfig = new AbilitiesConfig(saveLoader, _items);
-
-            _wallet.Initialize(saveLoader);
             _wallet.Enable();
-            _wallet.Accure(_moneyForAccure);
-
             _shop.Initialize(_wallet, _abilitiesConfig);
             _menuButtonsRoot.Initialize(_abilitiesConfig, _shop, _leaderboard);
         }
@@ -60,8 +64,9 @@ namespace Menu
 
         public void OnSceneLoaded(int collectedMoney)
         {
-            _moneyForAccure = collectedMoney;
+#if UNITY_WEBGL && !UNITY_EDITOR
             _leaderboard.SetPlayerScore(collectedMoney);
+#endif
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Zenject;
 
 public class WalletFacade : MonoBehaviour
 {
@@ -12,15 +13,17 @@ public class WalletFacade : MonoBehaviour
 
     public int Value => _model.Value;
 
-    public void Initialize(SaveLoader saveLoader)
+    [Inject]
+    public void Cunstruct(SaveLoader saveLoader, WalletModel walletModel)
     {
         if(saveLoader == null) 
             throw new ArgumentNullException();
 
-        _saveLoader = saveLoader;
-        _model = new WalletModel();
+        if (walletModel == null)
+            throw new ArgumentNullException();
 
-        _model.Accure(_saveLoader.LoadOrDefault(_key));
+        _saveLoader = saveLoader;
+        _model = walletModel;
         _walletView.Initialize(_model);
     }
 

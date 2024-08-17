@@ -1,6 +1,7 @@
 using IJunior.TypedScenes;
 using System;
 using UnityEngine;
+using Zenject;
 
 public class EntryPoint : MonoBehaviour, ISceneLoadHandler<GameConfig>
 {
@@ -11,14 +12,21 @@ public class EntryPoint : MonoBehaviour, ISceneLoadHandler<GameConfig>
     [SerializeField] private GameFinisher _gameFinisher;
     [SerializeField] private CoroutineServise _coroutineServise;
 
+    private GameConfig _gameConfig;
+
     public void OnSceneLoaded(GameConfig argument)
     {
         if (argument == null)
             throw new NullReferenceException();
 
-        _cubsRoot.Initialize(argument.CubsCount);
-        _timerRoot.Initialize(argument.TimerValue);
-        _abilitiesRoot.Initialize(argument.Abilities, _coroutineServise);
+        _gameConfig = argument;
+    }
+
+    private void Awake()
+    {
+        _cubsRoot.Initialize(_gameConfig.CubsCount);
+        _timerRoot.Initialize(_gameConfig.TimerValue);
+        _abilitiesRoot.Initialize(_gameConfig.Abilities, _coroutineServise);
 
         _gameFinisher.Initialize(_timerRoot.Timer, _cubsRoot.CubsCounter);
     }
