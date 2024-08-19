@@ -14,6 +14,7 @@ namespace Menu
         [SerializeField] private MenuButtonsRoot _menuButtonsRoot;
         [SerializeField] private WalletFacade _wallet;
         [SerializeField] private YandexLeaderboard _leaderboard;
+        [SerializeField] private Locolization _locolization;
 
         [SerializeField] private List<ItemData> _items;
 
@@ -34,7 +35,6 @@ namespace Menu
             _abilitiesConfig = new AbilitiesConfig(_saveLoader, _items);
 
             _wallet.Enable();
-            _shop.Initialize(_wallet, _abilitiesConfig);
             _menuButtonsRoot.Initialize(_abilitiesConfig, _shop, _leaderboard);
         }
 
@@ -54,6 +54,10 @@ namespace Menu
                         PlayerAccount.StartAuthorizationPolling(1500);
 #endif
             yield return null;
+
+            _locolization.Initialize();
+            _items.ForEach(item => item.SetLenguage(_locolization.CurrentLanguageCode));
+            _shop.Initialize(_wallet, _abilitiesConfig);
         }
 
         private void OnDisable()

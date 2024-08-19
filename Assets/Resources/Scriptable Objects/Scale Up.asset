@@ -12,9 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464b35794a6722c4e8cc4c848e9c0c4b, type: 3}
   m_Name: Scale Up
   m_EditorClassIdentifier: 
+  _languageVariatinos:
+  - {fileID: 1892853666779689839, guid: fce17d9153360b249a8438074f94a3fc, type: 3}
+  - {fileID: 8005072288884169016, guid: fe50356cc9e9b3a4bac00cbd979f4454, type: 3}
+  - {fileID: 5702441820493129788, guid: 7178fda1d13ed8842956536a9c0b4c83, type: 3}
+  _namesOnAnoutherLanguages:
+  - Scaling up
+  - "\u0423\u0432\u0435\u043B\u0438\u0447\u0435\u043D\u0438\u0435 "
+  - "B\xFCy\xFCtme "
   <Sprite>k__BackingField: {fileID: 21300000, guid: 5eda94a9dcf71e445ad17e3c065d1460,
     type: 3}
-  <Name>k__BackingField: Scale up
   <Price>k__BackingField: 50
   <ID>k__BackingField: 1
   <EffectDuration>k__BackingField: 10

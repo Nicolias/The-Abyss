@@ -4,37 +4,44 @@ using UnityEngine;
 
 public class Locolization : MonoBehaviour
 {
-    private const string EnglishCode = "English";
-    private const string RussianCode = "Russian";
-    private const string TurkishCode = "Turkish";
-    private const string Turkish = "tr";
-    private const string Russian = "ru";
-    private const string English = "en";
+    private const string English = "English";
+    private const string Russian = "Russian";
+    private const string Turkish = "Turkish";
+
+    private const string EnglishCode = "en";
+    private const string TurkishCode = "tr";
+    private const string RussianCode = "ru";
 
     [SerializeField] private LeanLocalization _leanLocalization;
 
-    private void Awake()
+    public string CurrentLanguageCode { get; private set; }
+
+    public void Initialize()
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
         ChangeLanguage();
 #endif
+
+        ChangeLanguage();
     }
 
     private void ChangeLanguage()
     {
-        string languageCode = YandexGamesSdk.Environment.i18n.lang;
+        string languageCode = RussianCode;
 
         switch (languageCode)
         {
-            case English:
-                _leanLocalization.SetCurrentLanguage(EnglishCode); 
+            case EnglishCode:
+                _leanLocalization.SetCurrentLanguage(English);
                 break;
-            case Turkish:
-                _leanLocalization.SetCurrentLanguage(TurkishCode);
+            case TurkishCode:
+                _leanLocalization.SetCurrentLanguage(Turkish);
                 break;
-            case Russian:
-                _leanLocalization.SetCurrentLanguage(RussianCode);
+            case RussianCode:
+                _leanLocalization.SetCurrentLanguage(Russian);
                 break;
         }
+
+        CurrentLanguageCode = languageCode;
     }
 }

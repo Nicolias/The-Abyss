@@ -12,9 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7382900597971dd4cbc9d4b4c1983217, type: 3}
   m_Name: Freez Time
   m_EditorClassIdentifier: 
+  _languageVariatinos:
+  - {fileID: 1892853666779689839, guid: fce17d9153360b249a8438074f94a3fc, type: 3}
+  - {fileID: 8005072288884169016, guid: fe50356cc9e9b3a4bac00cbd979f4454, type: 3}
+  - {fileID: 5702441820493129788, guid: 7178fda1d13ed8842956536a9c0b4c83, type: 3}
+  _namesOnAnoutherLanguages:
+  - Freez time
+  - "\u0417\u0430\u043C\u043E\u0440\u043E\u0437\u043A\u0430 \u0432\u0440\u0435\u043C\u0435\u043D\u0438"
+  - Zaman dondurma
   <Sprite>k__BackingField: {fileID: 21300000, guid: 552ee50297f7b4c04a775dedd5c96aea,
     type: 3}
-  <Name>k__BackingField: Freez time
   <Price>k__BackingField: 50
   <ID>k__BackingField: 0
   <EffectDuration>k__BackingField: 10

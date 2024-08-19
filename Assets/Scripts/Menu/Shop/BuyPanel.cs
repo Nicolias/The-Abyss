@@ -40,7 +40,7 @@ public class BuyPanel : MonoBehaviour
         gameObject.SetActive(true);
 
         _itemNameText.text = item.Data.Name;
-        _itemPriceText.text = "Price: " + item.Data.Price.ToString();
+        _itemPriceText.text = item.Data.Price.ToString();
         _itemImage.sprite = item.Data.Sprite;
     }
 

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class AbilityView : MonoBehaviour
 {
     [SerializeField] private TMP_Text _count;
+    [SerializeField] private TMP_Text _name;
     [SerializeField] private Image _icon;
 
     private Button _button;
@@ -35,6 +36,7 @@ public class AbilityView : MonoBehaviour
 
         UpdateCountText(model.Count);
         _icon.sprite = model.Data.Sprite;
+        _name.text = model.Data.Name;
     }
 
     public void UpdateCountText(int count)
