@@ -8,8 +8,6 @@ public class EndGameAdPanel : MonoBehaviour
     [SerializeField] private Button _showAdButton;
     [SerializeField] private Button _closeButton;
 
-    [SerializeField] private int _bonuseFactor = 2;
-
     private WalletModel _walletModel;
     private AdServise _adServise;
 
@@ -57,11 +55,12 @@ public class EndGameAdPanel : MonoBehaviour
     {
         gameObject.SetActive(false);
         _onClosedCallback.Invoke();
+        _walletModel.Accure(_currentScore);
     }
 
     private void OnReward()
     {
-        _walletModel.Accure(_currentScore * _bonuseFactor);
+        _walletModel.Accure(_currentScore);
         Close();
     }
 }
