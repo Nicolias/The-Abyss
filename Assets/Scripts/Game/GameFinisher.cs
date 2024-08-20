@@ -7,6 +7,7 @@ public class GameFinisher : MonoBehaviour
     [SerializeField] private GameObject _ui;
 
     [SerializeField] private EndGameAdPanel _endGameAdPanel;
+    [SerializeField] private HoleMovement _holeMovement;
 
     private Timer _timer;
     private CubsCounter _cubsCounter;
@@ -42,6 +43,7 @@ public class GameFinisher : MonoBehaviour
         _timer.Reset();
         _ui.SetActive(false);
         _endGameAdPanel.Open(_cubsCounter.Value, ShowFinalAnimation);
+        _holeMovement.Stop();
     }
 
     private void ShowFinalAnimation()

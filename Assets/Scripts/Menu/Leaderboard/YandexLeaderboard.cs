@@ -13,21 +13,25 @@ public class YandexLeaderboard : MonoBehaviour
 
     public void Open()
     {
+#if UNITY_WEBGL && !UNITY_EDITOR
         PlayerAccount.Authorize();
 
         if (PlayerAccount.IsAuthorized)
             PlayerAccount.RequestPersonalProfileDataPermission();
 
         if (PlayerAccount.IsAuthorized == false)
-            return;
+            return;    
 
         gameObject.SetActive(true);
         Fill();
+#endif
+        gameObject.SetActive(true);
     }
 
     public void SetPlayerScore(int score)
     {
-        if(PlayerAccount.IsAuthorized == false) 
+#if UNITY_WEBGL && !UNITY_EDITOR
+        if (PlayerAccount.IsAuthorized == false) 
             return;
 
         Leaderboard.GetPlayerEntry(LeaderboardName, (result) =>
@@ -35,6 +39,7 @@ public class YandexLeaderboard : MonoBehaviour
             if(result == null || result.score < score)
                 Leaderboard.SetScore(LeaderboardName, score);
         });
+#endif
     }
 
     private void Fill()

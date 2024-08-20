@@ -30,19 +30,6 @@ namespace Menu
             _saveLoader = saveLoader;
         }
 
-        private void Awake()
-        {
-            _abilitiesConfig = new AbilitiesConfig(_saveLoader, _items);
-
-            _wallet.Enable();
-            _menuButtonsRoot.Initialize(_abilitiesConfig, _shop, _leaderboard);
-        }
-
-        private void OnEnable()
-        {
-            _menuButtonsRoot.Enable();
-        }
-
         private IEnumerator Start()
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
@@ -55,9 +42,14 @@ namespace Menu
 #endif
             yield return null;
 
+            _abilitiesConfig = new AbilitiesConfig(_saveLoader, _items);
+            _menuButtonsRoot.Initialize(_abilitiesConfig, _shop, _leaderboard);
+
+            _wallet.Enable();
             _locolization.Initialize();
             _items.ForEach(item => item.SetLenguage(_locolization.CurrentLanguageCode));
             _shop.Initialize(_wallet, _abilitiesConfig);
+            _menuButtonsRoot.Enable();
         }
 
         private void OnDisable()
@@ -68,9 +60,7 @@ namespace Menu
 
         public void OnSceneLoaded(int collectedMoney)
         {
-#if UNITY_WEBGL && !UNITY_EDITOR
             _leaderboard.SetPlayerScore(collectedMoney);
-#endif
         }
     }
 }

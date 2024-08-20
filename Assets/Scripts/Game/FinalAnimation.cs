@@ -37,9 +37,9 @@ public class FinalAnimation : MonoBehaviour
         foreach (var cub in cubs)
         {
             Transform cubTransform = cub.transform;
+            cubTransform.position = _startCubPosition.position;
             _cubs.Add(cubTransform);
             cub.gameObject.SetActive(true);
-            cubTransform.position = _startCubPosition.position;
         }
 
         _camera.transform.position = _cameraPositionAndRotation.position;
