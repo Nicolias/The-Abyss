@@ -11,13 +11,19 @@ public class YandexLeaderboard : MonoBehaviour
 
     [SerializeField] private LeaderboardCellFactory _leaderboardCellFactory;
 
-    public void Open()
+    public void Initialize()
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
         PlayerAccount.Authorize();
 
         if (PlayerAccount.IsAuthorized)
             PlayerAccount.RequestPersonalProfileDataPermission();
+#endif
+    }
+
+    public void Open()
+    {
+#if UNITY_WEBGL && !UNITY_EDITOR
 
         if (PlayerAccount.IsAuthorized == false)
             return;    
@@ -25,7 +31,6 @@ public class YandexLeaderboard : MonoBehaviour
         gameObject.SetActive(true);
         Fill();
 #endif
-        gameObject.SetActive(true);
     }
 
     public void SetPlayerScore(int score)
@@ -60,7 +65,8 @@ public class YandexLeaderboard : MonoBehaviour
                 _leaderboardPlayers.Add(new LeaderboardPlayer(rank, name, score));
             }
 
-            _leaderboardCellFactory.ConstructLeaderboard(_leaderboardPlayers);
         });
+
+        _leaderboardCellFactory.ConstructLeaderboard(_leaderboardPlayers);
     }
 }

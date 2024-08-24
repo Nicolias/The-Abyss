@@ -1,6 +1,7 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 public class WalletView : MonoBehaviour
 {
@@ -8,21 +9,22 @@ public class WalletView : MonoBehaviour
 
     private IChangeable _changable;
 
-    public void Initialize(IChangeable changeable)
+    [Inject]
+    public void Construct(WalletModel walletModel)
     {
-        if (changeable == null)
+        if (walletModel == null)
             throw new ArgumentNullException();
 
-        _changable = changeable;
+        _changable = walletModel;
         OnChanged();
     }
 
-    public void Enable()
+    private void OnEnable()
     {
         _changable.Changed += OnChanged;
     }
 
-    public void Disable()
+    private void OnDisable()
     {
         _changable.Changed -= OnChanged;
     }

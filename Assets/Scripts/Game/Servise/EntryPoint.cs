@@ -1,12 +1,11 @@
 using IJunior.TypedScenes;
 using System;
 using UnityEngine;
-using Zenject;
 
 public class EntryPoint : MonoBehaviour, ISceneLoadHandler<GameConfig>
 {
     [SerializeField] private CubsRoot _cubsRoot;
-    [SerializeField] private AbilitiesRoot _abilitiesRoot;
+    [SerializeField] private AbilityRouter _abilityRouter;
     [SerializeField] private TimerRoot _timerRoot;
 
     [SerializeField] private GameFinisher _gameFinisher;
@@ -26,7 +25,7 @@ public class EntryPoint : MonoBehaviour, ISceneLoadHandler<GameConfig>
     {
         _cubsRoot.Initialize(_gameConfig.CubsCount);
         _timerRoot.Initialize(_gameConfig.TimerValue);
-        _abilitiesRoot.Initialize(_gameConfig.Abilities, _coroutineServise);
+        _abilityRouter.Initialize(_gameConfig.Abilities.Items, _coroutineServise);
 
         _gameFinisher.Initialize(_timerRoot.Timer, _cubsRoot.CubsCounter);
     }
@@ -34,10 +33,12 @@ public class EntryPoint : MonoBehaviour, ISceneLoadHandler<GameConfig>
     private void OnEnable()
     {
         _gameFinisher.Enbale();
+        _abilityRouter.Enable();
     }
 
     private void OnDisable()
     {
         _gameFinisher.Disable();
+        _abilityRouter.Disable();
     }
 }

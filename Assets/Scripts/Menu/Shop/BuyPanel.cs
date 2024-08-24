@@ -1,6 +1,8 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class BuyPanel : MonoBehaviour
 {
@@ -13,13 +15,17 @@ public class BuyPanel : MonoBehaviour
 
     [SerializeField] private GameObject _notEnoughMoneyPanel;
 
-    private WalletFacade _wallet;
+    private WalletModel _wallet;
 
     private ItemModel _currentItem;
 
-    public void Initialize(WalletFacade walletFacade)
+    [Inject]
+    public void Consturct(WalletModel walletModel)
     {
-        _wallet = walletFacade;
+        if (walletModel == null)
+            throw new NullReferenceException();
+
+        _wallet = walletModel;
     }
 
     private void OnEnable()

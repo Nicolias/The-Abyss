@@ -12,7 +12,7 @@ namespace Menu
     {
         [SerializeField] private Shop _shop;
         [SerializeField] private MenuButtonsRoot _menuButtonsRoot;
-        [SerializeField] private WalletFacade _wallet;
+        [SerializeField] private WalletSaver _wallet;
         [SerializeField] private YandexLeaderboard _leaderboard;
         [SerializeField] private Locolization _locolization;
 
@@ -22,40 +22,30 @@ namespace Menu
         private SaveLoader _saveLoader;
 
         [Inject]
-        public void Cunstruct(SaveLoader saveLoader)
+        public void Consturct(SaveLoader saveLoader)
         {
-            if (saveLoader == null)
-                throw new NullReferenceException();
-
             _saveLoader = saveLoader;
         }
 
-        private IEnumerator Start()
+        private void Awake()
         {
-#if UNITY_WEBGL && !UNITY_EDITOR
-            yield return YandexGamesSdk.Initialize();
-
-                    YandexGamesSdk.GameReady();
-
-                    if (PlayerAccount.IsAuthorized == false)
-                        PlayerAccount.StartAuthorizationPolling(1500);
-#endif
-            yield return null;
-
             _abilitiesConfig = new AbilitiesConfig(_saveLoader, _items);
             _menuButtonsRoot.Initialize(_abilitiesConfig, _shop, _leaderboard);
-
-            _wallet.Enable();
             _locolization.Initialize();
+            _leaderboard.Initialize();
+            _shop.Initialize(_abilitiesConfig);
+            _saveLoader.Initialize();
+        }
+
+        private void OnEnable()
+        {
             _items.ForEach(item => item.SetLenguage(_locolization.CurrentLanguageCode));
-            _shop.Initialize(_wallet, _abilitiesConfig);
             _menuButtonsRoot.Enable();
         }
 
         private void OnDisable()
         {
             _menuButtonsRoot.Disable();
-            _wallet.Disable();
         }
 
         public void OnSceneLoaded(int collectedMoney)

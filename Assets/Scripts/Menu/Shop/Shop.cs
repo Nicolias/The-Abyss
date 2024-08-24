@@ -8,10 +8,8 @@ public class Shop : MonoBehaviour
 
     [SerializeField] private Button _closeButton;
 
-    public void Initialize(WalletFacade walletFacade, AbilitiesConfig abilitiesConfig)
+    public void Initialize(AbilitiesConfig abilitiesConfig)
     {
-        _buyPanel.Initialize(walletFacade);
-
         _itemsViewFactory.Initialize(abilitiesConfig.Items, _buyPanel);
     }
 

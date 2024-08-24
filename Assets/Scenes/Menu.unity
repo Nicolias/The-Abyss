@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -302,7 +302,6 @@ GameObject:
   - component: {fileID: 102463158}
   - component: {fileID: 102463157}
   - component: {fileID: 102463161}
-  - component: {fileID: 102463162}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -411,26 +410,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shop: {fileID: 281468139}
   _menuButtonsRoot: {fileID: 437005709}
-  _wallet: {fileID: 102463162}
   _leaderboard: {fileID: 1253119337}
   _locolization: {fileID: 117252869}
   _items:
   - {fileID: 11400000, guid: d5d60d29806e6d04c9a2b2f442ca693c, type: 2}
   - {fileID: 11400000, guid: 9f394bfc4b041174989404881f71d94e, type: 2}
   - {fileID: 11400000, guid: 256ea2df764063f4d9d2aded2feaa302, type: 2}
---- !u!114 &102463162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 102463156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eda83b5daa30fb04197d12321376f00c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _walletView: {fileID: 612690904}
 --- !u!1 &117252868
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,9 +515,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 336755870}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -5233,7 +5218,8 @@ MonoBehaviour:
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 942589445191879500, guid: 02fea1fb776e0ad43a5e684a1ab0ce9e,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5257,7 +5243,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 57.8
+  m_fontSize: 56.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

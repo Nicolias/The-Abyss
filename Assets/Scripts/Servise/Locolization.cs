@@ -23,12 +23,11 @@ public class Locolization : MonoBehaviour
 
     private void ChangeLanguage()
     {
-        string languageCode;
+        string languageCode = EnglishCode;
 
 #if UNITY_WEBGL && !UNITY_EDITOR
         languageCode = YandexGamesSdk.Environment.i18n.lang;
 #endif
-        languageCode = EnglishCode;
 
         switch (languageCode)
         {
