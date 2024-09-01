@@ -16,7 +16,8 @@ public class FinalAnimation : MonoBehaviour
 
     [SerializeField] private Image _keepGoingImage;
     [SerializeField] private RectTransform _keepGoingRect;
-    [SerializeField] private Canvas _canvas;
+
+    [SerializeField] private ParticleSystem _fireworkPaeticale;
 
     private List<Transform> _cubs;
 
@@ -65,6 +66,8 @@ public class FinalAnimation : MonoBehaviour
             if (i != 0 && i % 10 == 0)
                 yield return new WaitForSeconds(0.5f);
         }
+
+        _fireworkPaeticale.Play();
 
         yield return new WaitForSeconds(_animationDuration);
 
