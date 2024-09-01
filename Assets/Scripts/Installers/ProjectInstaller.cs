@@ -1,16 +1,15 @@
-﻿using Zenject;
+using Reflex.Core;
+using UnityEngine;
 
-public class ProjectInstaller : MonoInstaller
+public class ProjectInstaller : MonoBehaviour, IInstaller
 {
-    public override void InstallBindings()
+    public void InstallBindings(ContainerBuilder builder)
     {
         SaveLoader saveLoader = new SaveLoader();
-        WalletModel walletModel = new WalletModel();
-        WalletSaver walletSaver = new WalletSaver(saveLoader, walletModel);
+        WalletModel walletSaver = new WalletModel();
 
-        Container.Bind<AdServise>().FromNew().AsSingle();
-        Container.Bind<WalletModel>().FromInstance(walletModel).AsSingle();
-        Container.Bind<SaveLoader>().FromInstance(saveLoader).AsSingle();
-        Container.Bind<WalletSaver>().FromInstance(walletSaver).AsSingle();
+        builder.AddSingleton(saveLoader);
+        builder.AddSingleton(walletSaver);
+        builder.AddSingleton(new WalletSaver(saveLoader, walletSaver));
     }
 }

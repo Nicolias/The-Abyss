@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Reflex.Attributes;
+using System;
 using TMPro;
 using UnityEngine;
-using Zenject;
 
 public class WalletView : MonoBehaviour
 {
@@ -16,11 +16,11 @@ public class WalletView : MonoBehaviour
             throw new ArgumentNullException();
 
         _changable = walletModel;
-        OnChanged();
     }
 
     private void OnEnable()
     {
+        OnChanged();
         _changable.Changed += OnChanged;
     }
 

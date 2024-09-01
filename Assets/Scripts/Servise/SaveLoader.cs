@@ -1,78 +1,41 @@
 using Agava.YandexGames;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Xml;
-using UnityEngine;
 
 public class SaveLoader
 {
-    private List<SaveData> _keyValuePairs = new List<SaveData>();
+    private Dictionary<string, int> _keyValuePairs = new Dictionary<string, int>();
 
-    private string _json;
+    public bool IsInitialized { get; private set; }
 
     public void Initialize()
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
-        PlayerAccount.GetCloudSaveData(result => _json = result);
-
-        if (string.IsNullOrEmpty(_json) == false)
+        PlayerAccount.GetCloudSaveData(result =>
         {
-            string[] pairs = _json.Split('@');
-            _keyValuePairs.Clear();
-            
-            foreach (var pair in pairs)
-                _keyValuePairs.Add(JsonUtility.FromJson<SaveData>(pair));
-        }
+            if (string.IsNullOrEmpty(result) == false)
+                _keyValuePairs = JsonConvert.DeserializeObject<Dictionary<string, int>>(result);
+
+            IsInitialized = true;
+        });
 #endif
     }
 
     public void Save(string key, int value)
     {
-        SaveData data = _keyValuePairs.Find(element => element.Key == key);
-
-        if (data != null)
-            data.Value = value;
+        if (_keyValuePairs.ContainsKey(key))
+            _keyValuePairs[key] = value;
         else
-            _keyValuePairs.Add(new SaveData(key, value));
-
-        _json = string.Empty;
-
-        foreach (var pair in _keyValuePairs)
-        {
-            if (_json == null)
-                _json = JsonUtility.ToJson(pair) + "@";
-            else
-                _json += JsonUtility.ToJson(pair) + "@";
-        }
-
+            _keyValuePairs.Add(key, value);
+        
 #if UNITY_WEBGL && !UNITY_EDITOR
-        PlayerAccount.SetCloudSaveData(_json);
+        PlayerAccount.SetCloudSaveData(JsonConvert.SerializeObject(_keyValuePairs, Formatting.Indented));
 #endif
     }
 
     public int LoadOrDefault(string key)
     {
-        SaveData data = _keyValuePairs.Find(element => element.Key == key);
-
-        if (data == null)
-            data = new SaveData(key, 0);
-
-        _keyValuePairs.Add(data);
-
-        return data.Value;
-    }
-
-    [Serializable]
-    private class SaveData
-    {
-        public SaveData(string key, int value)
-        {
-            Key = key;
-            Value = value;
-        }
-
-        public string Key;
-        public int Value;
+        return _keyValuePairs.ContainsKey(key) ? _keyValuePairs[key] : 0;
     }
 }

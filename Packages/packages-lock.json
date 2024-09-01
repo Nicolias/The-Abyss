@@ -7,13 +7,20 @@
       "dependencies": {},
       "hash": "3bdb25b6765d133a66c5032258d772a5ac5d58b8"
     },
+    "com.gustavopsantos.reflex": {
+      "version": "https://github.com/gustavopsantos/reflex.git?path=/Assets/Reflex/#8.6.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "2a097c55213937b149c27ef2bb1f2c8d0e1d3119"
+    },
     "com.unity.adaptiveperformance": {
       "version": "4.0.1",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.subsystemregistration": "1.1.0",
-        "com.unity.profiling.core": "1.0.2"
+        "com.unity.profiling.core": "1.0.2",
+        "com.unity.subsystemregistration": "1.1.0"
       },
       "url": "https://packages.unity.com"
     },
@@ -132,9 +139,9 @@
       "depth": 0,
       "source": "registry",
       "dependencies": {
+        "com.unity.modules.audio": "1.0.0",
         "com.unity.modules.director": "1.0.0",
         "com.unity.modules.animation": "1.0.0",
-        "com.unity.modules.audio": "1.0.0",
         "com.unity.modules.particlesystem": "1.0.0"
       },
       "url": "https://packages.unity.com"

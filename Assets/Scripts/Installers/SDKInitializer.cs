@@ -1,9 +1,9 @@
 using Agava.YandexGames;
+using Reflex.Attributes;
 using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Zenject;
 
 public class SDKInitializer : MonoBehaviour
 {
@@ -25,14 +25,15 @@ public class SDKInitializer : MonoBehaviour
 
     private IEnumerator Start()
     {
+#if UNITY_WEBGL && !UNITY_EDITOR
         yield return YandexGamesSdk.Initialize();
-
-        YandexGamesSdk.GameReady();
-
-        if (PlayerAccount.IsAuthorized == false)
-            PlayerAccount.StartAuthorizationPolling(1500);
+#else
+        yield return null;
+#endif
 
         _saveLoader.Initialize();
+        yield return new WaitUntil(() => _saveLoader.IsInitialized);
+
         _walletSaver.Load();
 
         SceneManager.LoadScene(1);

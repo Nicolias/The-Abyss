@@ -17,12 +17,12 @@ public class WalletSaver
 
         _saveLoader = saveLoader;
         _model = walletModel;
-        _model.Changed += Save;
     }
 
     public void Load()
     {
         _model.Accure(_saveLoader.LoadOrDefault(Key));
+        _model.Changed += Save;
     }
 
     private void Save()

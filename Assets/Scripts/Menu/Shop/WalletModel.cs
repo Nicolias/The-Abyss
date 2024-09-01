@@ -2,7 +2,7 @@ using System;
 
 public class WalletModel : IChangeable
 {
-    public int Value { get; private set; }
+    public int Value { get; private set; } = 1000;
 
     public event Action Changed;
 

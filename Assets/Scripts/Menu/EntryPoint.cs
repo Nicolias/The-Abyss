@@ -1,10 +1,11 @@
 using Agava.YandexGames;
 using IJunior.TypedScenes;
+using Reflex.Attributes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using Zenject;
 
 namespace Menu
 {
@@ -12,11 +13,12 @@ namespace Menu
     {
         [SerializeField] private Shop _shop;
         [SerializeField] private MenuButtonsRoot _menuButtonsRoot;
-        [SerializeField] private WalletSaver _wallet;
         [SerializeField] private YandexLeaderboard _leaderboard;
         [SerializeField] private Locolization _locolization;
 
         [SerializeField] private List<ItemData> _items;
+
+        [SerializeField] private TMP_Text _text;
 
         private AbilitiesConfig _abilitiesConfig;
         private SaveLoader _saveLoader;
@@ -29,17 +31,24 @@ namespace Menu
 
         private void Awake()
         {
+#if UNITY_WEBGL && !UNITY_EDITOR
+            YandexGamesSdk.GameReady();
+
+            if (PlayerAccount.IsAuthorized == false)
+                PlayerAccount.StartAuthorizationPolling(1500);
+#endif
+
             _abilitiesConfig = new AbilitiesConfig(_saveLoader, _items);
-            _menuButtonsRoot.Initialize(_abilitiesConfig, _shop, _leaderboard);
+
             _locolization.Initialize();
-            _leaderboard.Initialize();
+            _items.ForEach(item => item.SetLenguage(_locolization.CurrentLanguageCode));
+
+            _menuButtonsRoot.Initialize(_abilitiesConfig, _shop, _leaderboard);
             _shop.Initialize(_abilitiesConfig);
-            _saveLoader.Initialize();
         }
 
         private void OnEnable()
         {
-            _items.ForEach(item => item.SetLenguage(_locolization.CurrentLanguageCode));
             _menuButtonsRoot.Enable();
         }
 

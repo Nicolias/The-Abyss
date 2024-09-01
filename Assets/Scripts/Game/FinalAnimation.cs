@@ -33,6 +33,7 @@ public class FinalAnimation : MonoBehaviour
     {
         _cubs = new List<Transform>();
         _camera.transform.SetParent(null);
+        _camera.transform.localScale = Vector3.one;
 
         foreach (var cub in cubs)
         {

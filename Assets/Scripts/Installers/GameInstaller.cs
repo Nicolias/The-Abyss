@@ -1,9 +1,10 @@
-using Zenject;
+﻿using Reflex.Core;
+using UnityEngine;
 
-public class GameInstaller : MonoInstaller
+public class GameInstaller : MonoBehaviour, IInstaller
 {
-    public override void InstallBindings()
+    public void InstallBindings(ContainerBuilder builder)
     {
-        
+        builder.AddSingleton(new AdServise());
     }
 }

@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Reflex.Attributes;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 public class EndGameAdPanel : MonoBehaviour
 {
