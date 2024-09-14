@@ -6,13 +6,13 @@ public class ItemsViewFactory : MonoBehaviour
     [SerializeField] private ItemView _template;
     [SerializeField] private Transform _container;
 
-    public void Initialize(IEnumerable<ItemModel> itemModels, BuyPanel buyPanel)
+    public void Initialize(IEnumerable<ItemModel> itemModels, BuyPanel buyPanel, SoundConfig soundConfig)
     {
         foreach (ItemModel item in itemModels)
         {
             ItemView itemView = Instantiate(_template, _container);
 
-            itemView.Initialize(buyPanel, item);
+            itemView.Initialize(buyPanel, item, soundConfig);
         }
     }
 }

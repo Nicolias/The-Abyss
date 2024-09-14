@@ -30,7 +30,6 @@ public class YandexLeaderboard : MonoBehaviour
     public void SetPlayerScore(int score)
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
-#endif
         PlayerAccount.Authorize();
 
         if (PlayerAccount.IsAuthorized)
@@ -44,13 +43,13 @@ public class YandexLeaderboard : MonoBehaviour
             if(result == null || result.score < score)
                 Leaderboard.SetScore(LeaderboardName, score);
         });
+#endif
     }
 
     private void Fill()
     {
         _leaderboardPlayers.Clear();
 #if UNITY_WEBGL && !UNITY_EDITOR
-#endif
         Leaderboard.GetEntries(LeaderboardName, (result) =>
         {
             foreach (var entry in result.entries)
@@ -67,5 +66,6 @@ public class YandexLeaderboard : MonoBehaviour
 
             _leaderboardCellFactory.ConstructLeaderboard(_leaderboardPlayers);
         });
+#endif
     }
 }

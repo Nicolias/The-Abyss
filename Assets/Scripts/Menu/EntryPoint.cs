@@ -1,8 +1,6 @@
 using Agava.YandexGames;
 using IJunior.TypedScenes;
 using Reflex.Attributes;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -15,18 +13,21 @@ namespace Menu
         [SerializeField] private MenuButtonsRoot _menuButtonsRoot;
         [SerializeField] private YandexLeaderboard _leaderboard;
         [SerializeField] private Locolization _locolization;
+        [SerializeField] private AudioServise _audioServise;
 
         [SerializeField] private List<ItemData> _items;
 
-        [SerializeField] private TMP_Text _text;
-
         private AbilitiesConfig _abilitiesConfig;
         private SaveLoader _saveLoader;
+        private SoundConfig _soundConfig;
 
         [Inject]
-        public void Consturct(SaveLoader saveLoader)
+        public void Consturct(SaveLoader saveLoader, SoundConfig soundConfig, MusicConfig musicConfig)
         {
             _saveLoader = saveLoader;
+            _soundConfig = soundConfig;
+
+            _audioServise.Initialize(soundConfig, musicConfig);
         }
 
         private void Awake()
@@ -44,7 +45,7 @@ namespace Menu
             _items.ForEach(item => item.SetLenguage(_locolization.CurrentLanguageCode));
 
             _menuButtonsRoot.Initialize(_abilitiesConfig, _shop, _leaderboard);
-            _shop.Initialize(_abilitiesConfig);
+            _shop.Initialize(_abilitiesConfig, _soundConfig);
         }
 
         private void OnEnable()

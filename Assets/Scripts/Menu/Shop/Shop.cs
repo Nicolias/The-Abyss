@@ -8,9 +8,9 @@ public class Shop : MonoBehaviour
 
     [SerializeField] private Button _closeButton;
 
-    public void Initialize(AbilitiesConfig abilitiesConfig)
+    public void Initialize(AbilitiesConfig abilitiesConfig, SoundConfig soundConfig)
     {
-        _itemsViewFactory.Initialize(abilitiesConfig.Items, _buyPanel);
+        _itemsViewFactory.Initialize(abilitiesConfig.Items, _buyPanel, soundConfig);
     }
 
     private void OnEnable()

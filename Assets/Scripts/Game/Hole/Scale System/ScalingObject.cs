@@ -9,7 +9,9 @@ namespace ScalingSystem
         [SerializeField] private HoleCollider _holeCollider;
         [SerializeField] private ScalerProgressBar _progressBar;
         [SerializeField] private Vector3 _scaleFactor = new Vector3(0.3f, 0.3f, 0.3f);
-        
+
+        [SerializeField] private SoundObject _soundObject;
+
         private Scaler _scaler;
         private Transform _selfTransform;
 
@@ -35,8 +37,8 @@ namespace ScalingSystem
 
         public void Scale(Vector3 scaleFactor)
         {
-
             _selfTransform.DOScale(_selfTransform.localScale + scaleFactor, _scalingDuration).OnComplete(() => Completed?.Invoke());
+            _soundObject.PlaySound();
         }
 
         public void Unscale(Vector3 scaleFactor)

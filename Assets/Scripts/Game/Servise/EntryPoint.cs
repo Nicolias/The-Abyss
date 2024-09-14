@@ -1,4 +1,5 @@
 using IJunior.TypedScenes;
+using Reflex.Attributes;
 using System;
 using UnityEngine;
 
@@ -12,6 +13,13 @@ public class EntryPoint : MonoBehaviour, ISceneLoadHandler<GameConfig>
     [SerializeField] private CoroutineServise _coroutineServise;
 
     private GameConfig _gameConfig;
+    private SoundConfig _soundConfig;
+
+    [Inject]
+    public void Construct(SoundConfig soundConfig)
+    {
+        _soundConfig = soundConfig;
+    }
 
     public void OnSceneLoaded(GameConfig argument)
     {
@@ -25,7 +33,7 @@ public class EntryPoint : MonoBehaviour, ISceneLoadHandler<GameConfig>
     {
         _cubsRoot.Initialize(_gameConfig.CubsCount);
         _timerRoot.Initialize(_gameConfig.TimerValue);
-        _abilityRouter.Initialize(_gameConfig.Abilities.Items, _coroutineServise);
+        _abilityRouter.Initialize(_gameConfig.Abilities.Items, _coroutineServise, _soundConfig);
 
         _gameFinisher.Initialize(_timerRoot.Timer, _cubsRoot.CubsCounter);
     }

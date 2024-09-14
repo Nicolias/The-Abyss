@@ -10,7 +10,7 @@ public class AbilityRouter : MonoBehaviour
 
     private List<AbilityPresenter> _presenters = new List<AbilityPresenter>();
 
-    public void Initialize(IEnumerable<ItemModel> itemModels, CoroutineServise coroutineServise)
+    public void Initialize(IEnumerable<ItemModel> itemModels, CoroutineServise coroutineServise, SoundConfig soundConfig)
     {
         if (itemModels == null)
             throw new ArgumentNullException();
@@ -19,7 +19,7 @@ public class AbilityRouter : MonoBehaviour
             if (model == null)
                 throw new ArgumentNullException();
 
-        List<AbilityView> views = _viewFactory.CreateViews(itemModels);
+        List<AbilityView> views = _viewFactory.CreateViews(itemModels, soundConfig);
         List<AbilityModel> models = CreatModels(itemModels, coroutineServise);
 
         for (int i = 0; i < models.Count; i++)

@@ -11,5 +11,8 @@ public class ProjectInstaller : MonoBehaviour, IInstaller
         builder.AddSingleton(saveLoader);
         builder.AddSingleton(walletSaver);
         builder.AddSingleton(new WalletSaver(saveLoader, walletSaver));
+
+        builder.AddSingleton(new SoundConfig());
+        builder.AddSingleton(new MusicConfig());
     }
 }
