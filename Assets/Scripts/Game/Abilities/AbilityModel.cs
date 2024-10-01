@@ -33,9 +33,14 @@ public class AbilityModel
     }
 
     public int Count => _item.Count;
+    public int EffectDuration => _item.Data.EffectDuration;
+    public Sprite ItemSprite => _item.Data.Sprite;
 
     public event Action EffectEnd;
+    public event Action EffectStarted;
+
     public event Action<int> CountChanged;
+    public event Action<int> LeftTimeChanged;
 
     public void Enable()
     {
@@ -58,8 +63,18 @@ public class AbilityModel
 
     private IEnumerator LifeEffect()
     {
+        WaitForSeconds waitForSeconds = new WaitForSeconds(1);
+
+        EffectStarted?.Invoke();
+
         _abilityStarter.Visit(_item.Data);
-        yield return new WaitForSeconds(_item.Data.EffectDuration);
+
+        for (int i = _item.Data.EffectDuration; i >= 0; i--)
+        {
+            LeftTimeChanged?.Invoke(i);
+            yield return waitForSeconds;
+        }
+
         _abilityFinisher.Visit(_item.Data);
 
         EffectEnd?.Invoke();

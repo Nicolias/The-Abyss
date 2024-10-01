@@ -5,6 +5,8 @@ using System;
 public class AbilityRouter : MonoBehaviour
 {
     [SerializeField] private AbilityViewFactory _viewFactory;
+    [SerializeField] private AbilityVisualizeFactory _visualizeFactory;
+
     [SerializeField] private AbilityStarter _starter;
     [SerializeField] private AbilityFinisher _finisher;
 
@@ -24,16 +26,20 @@ public class AbilityRouter : MonoBehaviour
 
         for (int i = 0; i < models.Count; i++)
             _presenters.Add(new AbilityPresenter(models[i], views[i]));
+
+        _visualizeFactory.Initialize(models);
     }
 
     public void Enable()
     {
         _presenters.ForEach(presenter => presenter.Enable());
+        _visualizeFactory.Enable();
     }
 
     public void Disable()
     {
         _presenters.ForEach(presenter => presenter.Disable());
+        _visualizeFactory.Disable();
     }
 
     private List<AbilityModel> CreatModels(IEnumerable<ItemModel> itemModels, CoroutineServise coroutineServise)
