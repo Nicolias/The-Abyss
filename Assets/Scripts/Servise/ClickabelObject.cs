@@ -20,9 +20,4 @@ public class ClickabelObject : AudioObject
     {
         _button.onClick.RemoveListener(PlayAudio);
     }
-
-    public void Initialize(SoundConfig soundConfig)
-    {
-        OnInitialize(soundConfig);
-    }
 }

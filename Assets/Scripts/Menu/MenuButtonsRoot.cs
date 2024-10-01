@@ -14,21 +14,26 @@ namespace Menu
         private AbilitiesConfig _abilitiesConfig;
         private Shop _shop;
         private YandexLeaderboard _leaderboard;
+        private AdServise _adServise;
 
-        public void Initialize(AbilitiesConfig abilitiesConfig, Shop shop, YandexLeaderboard leaderboard)
+        public void Initialize(AbilitiesConfig abilitiesConfig, Shop shop, YandexLeaderboard leaderboard, AdServise adServise)
         {
             if (abilitiesConfig == null)
                 throw new ArgumentNullException();
 
-            if (shop == null)
+            if (adServise == null)
                 throw new ArgumentNullException();
 
             if(leaderboard == null)
                 throw new ArgumentNullException();
 
+            if (leaderboard == null)
+                throw new ArgumentNullException();
+
             _abilitiesConfig = abilitiesConfig;
             _shop = shop;
             _leaderboard = leaderboard;
+            _adServise = adServise;
         }
 
         public void Enable()
@@ -47,7 +52,7 @@ namespace Menu
 
         private void LoadGame()
         {
-            Game.Load(new GameConfig(_abilitiesConfig));
+            Game.Load(new GameConfig(_abilitiesConfig));            
         }
     }
 }

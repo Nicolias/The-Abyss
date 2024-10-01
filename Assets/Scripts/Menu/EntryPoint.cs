@@ -1,33 +1,28 @@
-using Agava.YandexGames;
-using IJunior.TypedScenes;
 using Reflex.Attributes;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 namespace Menu
 {
-    public class EntryPoint : MonoBehaviour, ISceneLoadHandler<int>
+    public class EntryPoint : MonoBehaviour
     {
         [SerializeField] private Shop _shop;
         [SerializeField] private MenuButtonsRoot _menuButtonsRoot;
         [SerializeField] private YandexLeaderboard _leaderboard;
         [SerializeField] private Locolization _locolization;
-        [SerializeField] private AudioServise _audioServise;
 
         [SerializeField] private List<ItemData> _items;
 
         private AbilitiesConfig _abilitiesConfig;
         private SaveLoader _saveLoader;
-        private SoundConfig _soundConfig;
+        private AdServise _adServise;
+        private AudioServise _audioServise;
 
         [Inject]
-        public void Consturct(SaveLoader saveLoader, SoundConfig soundConfig, MusicConfig musicConfig)
+        public void Consturct(SaveLoader saveLoader, AdServise adServise)
         {
             _saveLoader = saveLoader;
-            _soundConfig = soundConfig;
-
-            _audioServise.Initialize(soundConfig, musicConfig);
+            _adServise = adServise;
         }
 
         private void Awake()
@@ -44,8 +39,8 @@ namespace Menu
             _locolization.Initialize();
             _items.ForEach(item => item.SetLenguage(_locolization.CurrentLanguageCode));
 
-            _menuButtonsRoot.Initialize(_abilitiesConfig, _shop, _leaderboard);
-            _shop.Initialize(_abilitiesConfig, _soundConfig);
+            _menuButtonsRoot.Initialize(_abilitiesConfig, _shop, _leaderboard, _adServise);
+            _shop.Initialize(_abilitiesConfig);
         }
 
         private void OnEnable()
@@ -56,11 +51,6 @@ namespace Menu
         private void OnDisable()
         {
             _menuButtonsRoot.Disable();
-        }
-
-        public void OnSceneLoaded(int collectedMoney)
-        {
-            _leaderboard.SetPlayerScore(collectedMoney);
         }
     }
 }

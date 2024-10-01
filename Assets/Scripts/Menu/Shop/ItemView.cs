@@ -8,8 +8,6 @@ public class ItemView : MonoBehaviour
     [SerializeField] private Button _button;
     [SerializeField] private TMP_Text _countText;
 
-    [SerializeField] private ClickabelObject _soundObject;
-
     [SerializeField] private TMP_Text _price;
     [SerializeField] private TMP_Text _name;
     [SerializeField] private Image _image;
@@ -18,7 +16,7 @@ public class ItemView : MonoBehaviour
 
     private BuyPanel _buyPanel;
 
-    public void Initialize(BuyPanel buyPanel, ItemModel model, SoundConfig soundConfig)
+    public void Initialize(BuyPanel buyPanel, ItemModel model)
     {
         if (buyPanel == null)
             throw new ArgumentNullException();
@@ -32,8 +30,6 @@ public class ItemView : MonoBehaviour
         _name.text = _model.Data.Name;
         _price.text = _model.Data.Price.ToString();
         _image.sprite = _model.Data.Sprite;
-
-        _soundObject.Initialize(soundConfig);
 
         OnChanged();
     }

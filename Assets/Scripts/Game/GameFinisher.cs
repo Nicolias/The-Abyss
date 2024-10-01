@@ -6,13 +6,18 @@ public class GameFinisher : MonoBehaviour
     [SerializeField] private FinalAnimation _finalAnimation;
     [SerializeField] private GameObject _ui;
 
-    [SerializeField] private EndGameAdPanel _endGameAdPanel;
+    [SerializeField] private StatisticPanel _statisticPanel;
     [SerializeField] private HoleMovement _holeMovement;
+
+    [SerializeField] private EndGamePanel _endGamePanel;
 
     private Timer _timer;
     private CubsCounter _cubsCounter;
+    private LeaderboardReader _leaderboardReader;
 
-    public void Initialize(Timer timer, CubsCounter cubsCounter)
+    public event Action GameFinished;
+
+    public void Initialize(Timer timer, CubsCounter cubsCounter, LeaderboardReader leaderboardReader)
     {
         if (timer == null)
             throw new ArgumentNullException();
@@ -20,8 +25,12 @@ public class GameFinisher : MonoBehaviour
         if (cubsCounter == null)
             throw new ArgumentNullException();
 
+        if(leaderboardReader == null)
+            throw new ArgumentNullException();
+
         _timer = timer;
         _cubsCounter = cubsCounter;
+        _leaderboardReader = leaderboardReader;
     }
 
     public void Enbale()
@@ -42,7 +51,7 @@ public class GameFinisher : MonoBehaviour
     {
         _timer.Reset();
         _ui.SetActive(false);
-        _endGameAdPanel.Open(_cubsCounter.Value, ShowFinalAnimation);
+        _statisticPanel.Open(_cubsCounter.Value, _cubsCounter.MaxValue, ShowFinalAnimation);
         _holeMovement.Stop();
     }
 
@@ -61,6 +70,8 @@ public class GameFinisher : MonoBehaviour
 
     private void OnFinalAnimationComplete()
     {
-        IJunior.TypedScenes.Menu.Load(_cubsCounter.Value);
+        GameFinished?.Invoke();
+        _endGamePanel.Open();
+        _leaderboardReader.SetPlayerScore(_cubsCounter.Value);
     }
 }

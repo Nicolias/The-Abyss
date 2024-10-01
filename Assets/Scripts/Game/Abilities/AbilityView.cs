@@ -10,8 +10,6 @@ public class AbilityView : MonoBehaviour
     [SerializeField] private TMP_Text _name;
     [SerializeField] private Image _icon;
 
-    [SerializeField] private ClickabelObject _soundObject;
-
     private Button _button;
 
     public event Action Clicked;
@@ -31,7 +29,7 @@ public class AbilityView : MonoBehaviour
         _button.onClick.RemoveListener(OnClick);
     }
 
-    public void Initialize(ItemModel model, SoundConfig soundConfig)
+    public void Initialize(ItemModel model)
     {
         if (model == null)
             throw new ArgumentNullException();
@@ -39,7 +37,6 @@ public class AbilityView : MonoBehaviour
         UpdateCountText(model.Count);
         _icon.sprite = model.Data.Sprite;
         _name.text = model.Data.Name;
-        _soundObject.Initialize(soundConfig);
     }
 
     public void UpdateCountText(int count)

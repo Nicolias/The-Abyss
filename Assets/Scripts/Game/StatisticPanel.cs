@@ -3,8 +3,10 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EndGameAdPanel : MonoBehaviour
+public class StatisticPanel : MonoBehaviour
 {
+    [SerializeField] private AdPanelOpenAnimation _openAnimation;
+
     [SerializeField] private Button _showAdButton;
     [SerializeField] private Button _closeButton;
 
@@ -26,6 +28,7 @@ public class EndGameAdPanel : MonoBehaviour
 
         _adServise = adServise;
         _walletModel = walletModel;
+        _openAnimation.Initialize(_showAdButton, _closeButton);
     }
 
     private void OnEnable()
@@ -33,7 +36,7 @@ public class EndGameAdPanel : MonoBehaviour
         _adServise.RewardCallback += OnReward;
 
         _closeButton.onClick.AddListener(Close);
-        _showAdButton.onClick.AddListener(_adServise.Show);
+        _showAdButton.onClick.AddListener(_adServise.ShowReward);
     }
 
     private void OnDisable()
@@ -41,14 +44,16 @@ public class EndGameAdPanel : MonoBehaviour
         _adServise.RewardCallback -= OnReward;
 
         _closeButton.onClick.RemoveListener(Close);
-        _showAdButton.onClick.RemoveListener(_adServise.Show);
+        _showAdButton.onClick.RemoveListener(_adServise.ShowReward);
     }
 
-    public void Open(int currentScore, Action onClosedCallBack)
+    public void Open(int currentScore, int maxScore, Action onClosedCallBack)
     {
-        _currentScore = currentScore;
         gameObject.SetActive(true);
+        _currentScore = currentScore;
         _onClosedCallback = onClosedCallBack;
+
+        _openAnimation.Show(currentScore, maxScore);
     }
 
     private void Close()

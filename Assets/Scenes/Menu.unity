@@ -302,7 +302,6 @@ GameObject:
   - component: {fileID: 102463158}
   - component: {fileID: 102463157}
   - component: {fileID: 102463161}
-  - component: {fileID: 102463162}
   - component: {fileID: 102463163}
   - component: {fileID: 102463164}
   m_Layer: 5
@@ -415,35 +414,10 @@ MonoBehaviour:
   _menuButtonsRoot: {fileID: 437005709}
   _leaderboard: {fileID: 1253119337}
   _locolization: {fileID: 117252869}
-  _audioServise: {fileID: 102463162}
   _items:
   - {fileID: 11400000, guid: d5d60d29806e6d04c9a2b2f442ca693c, type: 2}
   - {fileID: 11400000, guid: 9f394bfc4b041174989404881f71d94e, type: 2}
   - {fileID: 11400000, guid: 256ea2df764063f4d9d2aded2feaa302, type: 2}
---- !u!114 &102463162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 102463156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e2329cc556a93d49a1c7fad9b9ccddb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _clickableObject:
-  - {fileID: 830433195}
-  - {fileID: 1700547722}
-  - {fileID: 1984239254}
-  - {fileID: 1751420419}
-  - {fileID: 437005713}
-  - {fileID: 524747396}
-  - {fileID: 1849623706}
-  - {fileID: 449494654}
-  - {fileID: 1782795088}
-  _soundObjects: []
-  _musicObject: {fileID: 102463163}
 --- !u!114 &102463163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,7 +442,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 64da92a8e3efa084bbed22eceb7f5c09, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -2057,7 +2031,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -26.061096, y: -26.160202}
+  m_AnchoredPosition: {x: -26.061096, y: -26.160217}
   m_SizeDelta: {x: 36.7186, y: 37.0928}
   m_Pivot: {x: 0.49999857, y: 0.50000036}
 --- !u!114 &524747392
