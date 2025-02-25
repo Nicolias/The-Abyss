@@ -59,3 +59,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioServise: {fileID: 9159834853689083014, guid: c55908e4eb301f342ac10f6d2cf78424,
     type: 3}
+  _pauseServise: {fileID: -5970379305440860585, guid: d08506d0320f31f41b2a109728548ea9,
+    type: 3}

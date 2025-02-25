@@ -4,7 +4,7 @@ public class AbilityStarter : AbilityVisitor
 {
     public override void Visit(FreezTime freezTime)
     {
-        Timer.Pause();
+        Timer.Paus();
     }
 
     public override void Visit(ScaleUp scaleUp)

@@ -1,3 +1,4 @@
+using Agava.YandexGames;
 using Reflex.Attributes;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ namespace Menu
     {
         [SerializeField] private Shop _shop;
         [SerializeField] private MenuButtonsRoot _menuButtonsRoot;
-        [SerializeField] private YandexLeaderboard _leaderboard;
+        [SerializeField] private LeaderboardOpenPanel _leaderboard;
         [SerializeField] private Locolization _locolization;
 
         [SerializeField] private List<ItemData> _items;
@@ -29,7 +30,6 @@ namespace Menu
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             YandexGamesSdk.GameReady();
-
             if (PlayerAccount.IsAuthorized == false)
                 PlayerAccount.StartAuthorizationPolling(1500);
 #endif

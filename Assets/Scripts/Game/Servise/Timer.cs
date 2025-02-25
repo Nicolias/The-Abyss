@@ -1,18 +1,27 @@
 using System;
 using System.Collections;
+using Reflex.Attributes;
 using SliderViewNameSpace;
 using UnityEngine;
 
-public class Timer : MonoBehaviour, IChangable
+public class Timer : MonoBehaviour, IChangable, IPausableObject
 {
     private bool _isPause;
 
     private Coroutine _currentTimer;
+    private PausServise _pauseServise;
 
     public int MaxValue { get; private set; }
 
     public event Action<float> Changed;
     public event Action Finished;
+
+    [Inject]
+    public void Construct(PausServise pausServise)
+    {
+        _pauseServise = pausServise;
+        _pauseServise.Add(this);
+    }
 
     public void Initialize(int maxTime)
     {
@@ -27,12 +36,12 @@ public class Timer : MonoBehaviour, IChangable
         _isPause = false;
     }
 
-    public void Pause()
+    public void Paus()
     {
         _isPause = true;
     }
 
-    public void Play()
+    public void UnPaus()
     {
         _isPause = false;
     }
@@ -58,5 +67,10 @@ public class Timer : MonoBehaviour, IChangable
         }
 
         Finished?.Invoke();
+    }
+
+    private void OnBackgroundChanged(bool inBackground)
+    {
+        _isPause = inBackground;
     }
 }

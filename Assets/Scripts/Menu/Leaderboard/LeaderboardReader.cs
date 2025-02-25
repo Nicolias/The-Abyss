@@ -1,13 +1,12 @@
-﻿public class LeaderboardReader
+﻿using Agava.YandexGames;
+
+public class LeaderboardReader
 {
+    private const string LeaderboardName = "Leaderboard12";
+
     public void SetPlayerScore(int score)
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
-        PlayerAccount.Authorize();
-
-        if (PlayerAccount.IsAuthorized)
-            PlayerAccount.RequestPersonalProfileDataPermission();
-
         if (PlayerAccount.IsAuthorized == false) 
             return;
 

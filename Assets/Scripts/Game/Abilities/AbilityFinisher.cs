@@ -4,7 +4,7 @@ public class AbilityFinisher : AbilityVisitor
 {
     public override void Visit(FreezTime freezTime)
     {
-        Timer.Play();
+        Timer.UnPaus();
     }
 
     public override void Visit(ScaleUp scaleUp)

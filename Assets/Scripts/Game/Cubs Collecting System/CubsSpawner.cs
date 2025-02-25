@@ -1,13 +1,12 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CubsSpawner : MonoBehaviour
 {
     [SerializeField] private Cub _template;
 
-    [SerializeField] private float _xSpacing;
-    [SerializeField] private float _ySpacing;
     [SerializeField] private Vector3 _firstCubSpawnPosition;
-    [SerializeField] private int _cubsCountPerRow;
 
     private Transform _transform;
 
@@ -19,24 +18,17 @@ public class CubsSpawner : MonoBehaviour
         _transform = transform;
     }
 
-    public void Spawn(int count)
+    public void Spawn(int count, SpawnShape spawnShape)
     {
-        int cubsCountPerColumn = count / _cubsCountPerRow;
+        List<Vector3> spawnPoints = spawnShape.GetPositions(count, _firstCubSpawnPosition);
 
-        float xSpawnPosition = _firstCubSpawnPosition.x;
-        float ySpawnPosition = _firstCubSpawnPosition.z;
+        if (spawnPoints.Count != count)
+            throw new InvalidProgramException();
 
-        for (int i = 0; i < cubsCountPerColumn; i++)
+        foreach (Vector3 spawnPoint in spawnPoints)
         {
-            for (int j = 0; j < _cubsCountPerRow; j++)
-            {
-                Cub cub = Instantiate(_template, new Vector3(xSpawnPosition, _firstCubSpawnPosition.y, ySpawnPosition), Quaternion.identity, _transform);
-                cub.Enable();
-                xSpawnPosition += _xSpacing;
-            }
-
-            xSpawnPosition = _firstCubSpawnPosition.x;
-            ySpawnPosition += _ySpacing;
+            Cub cub = Instantiate(_template, spawnPoint, Quaternion.identity, _transform);
+            cub.Enable();
         }
     }
 }

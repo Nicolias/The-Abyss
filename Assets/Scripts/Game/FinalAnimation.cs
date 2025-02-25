@@ -74,5 +74,8 @@ public class FinalAnimation : MonoBehaviour
         yield return _keepGoingImage.transform.DOLocalMove(new Vector3(0, 0, 0), _animationDuration / 2).WaitForCompletion();
 
         Complete?.Invoke();
+
+        _keepGoingImage.gameObject.SetActive(false);
+        _fireworkPaeticale.Stop();
     }
 }

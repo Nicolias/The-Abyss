@@ -14,6 +14,8 @@ public class EntryPoint : MonoBehaviour, ISceneLoadHandler<GameConfig>
 
     [SerializeField] private EndGamePanel _endGamePanel;
 
+    [SerializeField] private Locolization _localization;
+
     private GameConfig _gameConfig;
     private AdServise _adServise;
     private LeaderboardReader _leaderboardReader;
@@ -31,11 +33,13 @@ public class EntryPoint : MonoBehaviour, ISceneLoadHandler<GameConfig>
             throw new NullReferenceException();
 
         _gameConfig = argument;
+
+        _localization.Initialize();
     }
 
     private void Awake()
     {
-        Reset();
+        SetUp();
     }
 
     private void OnEnable()

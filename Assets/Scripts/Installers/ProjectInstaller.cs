@@ -4,17 +4,21 @@ using UnityEngine;
 public class ProjectInstaller : MonoBehaviour, IInstaller
 {
     [SerializeField] private AudioServise _audioServise;
+    [SerializeField] private PausServise _pauseServise;
 
     public void InstallBindings(ContainerBuilder builder)
     {
+        PausServise pausServise = Instantiate(_pauseServise);
+        AudioServise audioServise = Instantiate(_audioServise);
+
         SaveLoader saveLoader = new SaveLoader();
-        AdServise adServise = new AdServise();
+        AdServise adServise = new AdServise(pausServise);
         WalletModel walletSaver = new WalletModel();
 
         LeaderboardReader leaderboardReader = new LeaderboardReader();
 
-        AudioServise audioServise = Instantiate(_audioServise);
-        audioServise.Initialize(adServise);
+        audioServise.Initialize(pausServise);
+
 
         builder.AddSingleton(saveLoader);
         builder.AddSingleton(adServise);
@@ -25,5 +29,8 @@ public class ProjectInstaller : MonoBehaviour, IInstaller
 
         DontDestroyOnLoad(audioServise);
         builder.AddSingleton(audioServise, typeof(AudioServise));
+
+        DontDestroyOnLoad(pausServise);
+        builder.AddSingleton(pausServise);
     }
 }

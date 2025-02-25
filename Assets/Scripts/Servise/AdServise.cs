@@ -5,10 +5,16 @@ using UnityEngine;
 public class AdServise
 {
     private Action _onCloseCallBack;
+    private PausServise _pausServise;
 
     public event Action Opened;
     public event Action RewardCallback;
     public event Action Closed;
+
+    public AdServise(PausServise pausServise)
+    {
+        _pausServise = pausServise;
+    }
 
     public void ShowReward()
     {
@@ -33,7 +39,7 @@ public class AdServise
 
     private void OnOpenCallback()
     {
-        Time.timeScale = 0;
+        _pausServise.Paus();
         Opened?.Invoke();
     }
 
@@ -48,7 +54,6 @@ public class AdServise
     private void OnRewardCallback()
     {
         RewardCallback?.Invoke();
-        Continue();
     }
 
     private void OnRewardCloseCallBack()
@@ -58,7 +63,7 @@ public class AdServise
 
     private void Continue()
     {
-        Time.timeScale = 1;
+        _pausServise.UnPaus();
         Closed?.Invoke();
     }
 }

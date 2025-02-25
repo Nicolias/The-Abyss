@@ -1,4 +1,5 @@
 ﻿using SliderViewNameSpace;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CubsRoot : MonoBehaviour
@@ -8,6 +9,8 @@ public class CubsRoot : MonoBehaviour
 
     [SerializeField] private CubsSpawner _cubsSpawner;
 
+    [SerializeField] private List<SpawnShape> _spawnShapes;
+
     public CubsCounter CubsCounter => _cubsCounter;
 
     public void Initialize(int cubsCount)
@@ -15,6 +18,6 @@ public class CubsRoot : MonoBehaviour
         _cubsCounter.Initialize(cubsCount);
         _fillCubsSlider.Initialize(_cubsCounter);
 
-        _cubsSpawner.Spawn(cubsCount);
+        _cubsSpawner.Spawn(cubsCount, _spawnShapes[Random.Range(0, _spawnShapes.Count)]);
     }
 }
