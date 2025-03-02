@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class MoneyCounter : MonoBehaviour
 {
+    private const int MoneyPerCub = 1;
+
     [SerializeField] private HoleCollider _holeCollider;
 
-    private int _moneyPerCub = 1;
-    
     public int Amount { get; private set; }
 
     public event Action Changed;
-    
+
     private void OnEnable()
     {
         _holeCollider.Detected += OnDetected;
@@ -23,7 +23,7 @@ public class MoneyCounter : MonoBehaviour
 
     private void OnDetected(Cub cub)
     {
-        Amount += _moneyPerCub;
+        Amount += MoneyPerCub;
         Changed?.Invoke();
     }
 }

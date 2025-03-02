@@ -3,9 +3,15 @@ using UnityEngine;
 
 public abstract class AbilityVisitor : MonoBehaviour
 {
-    [SerializeField] protected HoleMovement Movement;
-    [SerializeField] protected Timer Timer;
-    [SerializeField] protected ScalingObject ScalingObject;
+    [SerializeField] private HoleMovement _movement;
+    [SerializeField] private Timer _timer;
+    [SerializeField] private ScalingObject _scalingObject;
+
+    protected HoleMovement Movement => _movement;
+
+    protected Timer Timer => _timer;
+
+    protected ScalingObject ScalingObject => _scalingObject;
 
     public void Visit(ItemData item)
     {
@@ -13,6 +19,8 @@ public abstract class AbilityVisitor : MonoBehaviour
     }
 
     public abstract void Visit(FreezTime freezTime);
+
     public abstract void Visit(ScaleUp scaleUp);
+
     public abstract void Visit(SpeedUp speedUp);
 }

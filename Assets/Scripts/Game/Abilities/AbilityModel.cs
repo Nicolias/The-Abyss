@@ -9,37 +9,39 @@ public class AbilityModel
     private readonly AbilityStarter _abilityStarter;
     private readonly AbilityFinisher _abilityFinisher;
 
-    private ItemModel _item;
+    private readonly ItemModel _item;
 
     public AbilityModel(AbilityStarter abilityStarter, AbilityFinisher abilityFinisher, ItemModel item, CoroutineServise coroutineServise)
     {
         if (abilityStarter == null)
             throw new ArgumentNullException();
 
-        if (abilityFinisher == null)
+        if (abilityFinisher ==null)
             throw new ArgumentNullException();
 
         if (item == null)
             throw new ArgumentNullException();
 
-        if(coroutineServise == null)
+        if (coroutineServise == null)
             throw new ArgumentNullException();
 
         _abilityStarter = abilityStarter;
         _abilityFinisher = abilityFinisher;
         _item = item;
         _coroutineServise = coroutineServise;
-
     }
 
     public int Count => _item.Count;
     public int EffectDuration => _item.Data.EffectDuration;
+
     public Sprite ItemSprite => _item.Data.Sprite;
 
     public event Action EffectEnd;
+
     public event Action EffectStarted;
 
     public event Action<int> CountChanged;
+
     public event Action<int> LeftTimeChanged;
 
     public void Enable()

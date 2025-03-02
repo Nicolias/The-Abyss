@@ -1,11 +1,13 @@
-﻿using DG.Tweening;
-using System;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
 
 namespace ScalingSystem
 {
     public class ScalingObject : MonoBehaviour
     {
+        private const float ScalingDuration = 3f;
+
         [SerializeField] private HoleCollider _holeCollider;
         [SerializeField] private ScalerProgressBar _progressBar;
         [SerializeField] private Vector3 _scaleFactor = new Vector3(0.3f, 0.3f, 0.3f);
@@ -14,8 +16,6 @@ namespace ScalingSystem
 
         private Scaler _scaler;
         private Transform _selfTransform;
-
-        private float _scalingDuration = 3f;
 
         public event Action Completed;
 
@@ -37,13 +37,13 @@ namespace ScalingSystem
 
         public void Scale(Vector3 scaleFactor)
         {
-            _selfTransform.DOScale(_selfTransform.localScale + scaleFactor, _scalingDuration).OnComplete(() => Completed?.Invoke());
+            _selfTransform.DOScale(_selfTransform.localScale + scaleFactor, ScalingDuration).OnComplete(() => Completed?.Invoke());
             _soundObject.PlaySound();
         }
 
         public void Unscale(Vector3 scaleFactor)
         {
-            _selfTransform.DOScale(_selfTransform.localScale - scaleFactor, _scalingDuration).OnComplete(() => Completed?.Invoke());
+            _selfTransform.DOScale(_selfTransform.localScale - scaleFactor, ScalingDuration).OnComplete(() => Completed?.Invoke());
         }
     }
 }

@@ -5,28 +5,7 @@ public class Heart : MonoBehaviour
 {
     [SerializeField] private List<Transform> _positionsTransform;
 
-    private System.Random _random = new();
-
-    private int[,] _heartMap = new int[,]
-   {
-         { 0,0,0,2,2,2,2,2,0,0,0,0,2,2,2,2,2,0,0,0 },
-         { 0,0,2,2,1,1,1,2,2,0,0,2,2,1,1,1,2,2,0,0 },
-         { 0,2,2,1,1,1,1,1,2,2,2,2,1,1,1,1,1,2,2,0 },
-         { 2,2,1,1,1,1,1,1,1,2,2,1,1,1,1,1,1,1,2,2 },
-         { 2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2 },
-         { 2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2 },
-         { 2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2 },
-         { 2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2 },
-         { 2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2 },
-         { 0,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,0 },
-         { 0,0,2,2,1,1,1,1,1,1,1,1,1,1,1,1,2,2,0,0 },
-         { 0,0,0,2,2,1,1,1,1,1,1,1,1,1,1,2,2,0,0,0 },
-         { 0,0,0,0,2,2,1,1,1,1,1,1,1,1,2,2,0,0,0,0 },
-         { 0,0,0,0,0,2,2,1,1,1,1,1,1,2,2,0,0,0,0,0 },
-         { 0,0,0,0,0,0,2,2,1,1,1,1,2,2,0,0,0,0,0,0 },
-         { 0,0,0,0,0,0,0,2,2,1,1,2,2,0,0,0,0,0,0,0 },
-         { 0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0 },
-   };
+    private readonly System.Random _random = new System.Random();
 
     public List<Vector3> GetPositions()
     {
@@ -35,9 +14,8 @@ public class Heart : MonoBehaviour
         for (int i = _positionsTransform.Count - 1; i >= 1; i--)
         {
             int j = _random.Next(i + 1);
-            var temp = _positionsTransform[j];
-            _positionsTransform[j] = _positionsTransform[i];
-            _positionsTransform[i] = temp;
+
+            (_positionsTransform[j], _positionsTransform[i]) = (_positionsTransform[i], _positionsTransform[j]);
         }
 
         _positionsTransform.ForEach(positionTransform => positions.Add(positionTransform.position));

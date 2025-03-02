@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class NumberView : MonoBehaviour
@@ -31,11 +29,15 @@ public class NumberView : MonoBehaviour
     {
         if (_timeLeft <= 0)
             Disable();
-        
-        if(_gameObject.activeInHierarchy == false)
+
+        if (_gameObject.activeInHierarchy == false)
             return;
 
-        _transform.position += _moveVector * _speed * Time.deltaTime;
+        _transform.position += new Vector3(
+            _moveVector.x * _speed * Time.deltaTime,
+            _moveVector.y * _speed * Time.deltaTime,
+            _moveVector.z * _speed * Time.deltaTime);
+
         _timeLeft -= Time.deltaTime;
     }
 

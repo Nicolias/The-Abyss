@@ -9,7 +9,7 @@ public class WalletSaver
 
     public WalletSaver(SaveLoader saveLoader, WalletModel walletModel)
     {
-        if(saveLoader == null) 
+        if (saveLoader == null)
             throw new ArgumentNullException();
 
         if (walletModel == null)

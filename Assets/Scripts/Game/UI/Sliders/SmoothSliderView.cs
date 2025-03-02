@@ -33,12 +33,10 @@ namespace SliderViewNameSpace
 
             while (Slider.normalizedValue != currentHealthNormolized)
             {
-                Slider.normalizedValue = Mathf.MoveTowards
-                (
+                Slider.normalizedValue = Mathf.MoveTowards(
                     Slider.normalizedValue,
                     currentHealthNormolized,
-                    _fillSpeed * Time.deltaTime
-                );
+                    _fillSpeed * Time.deltaTime);
 
                 yield return null;
             }

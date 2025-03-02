@@ -4,8 +4,8 @@
     {
         public void UpdateUI(float currentValue, float maxValue)
         {
-            int currentProcent = (int) (currentValue / maxValue * 100);
-            
+            int currentProcent = (int)(currentValue / maxValue * 100);
+
             Text.text = $"{currentProcent} %";
         }
     }

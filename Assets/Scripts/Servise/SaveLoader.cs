@@ -1,7 +1,7 @@
-using Agava.YandexGames;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using Agava.YandexGames;
+using Newtonsoft.Json;
 
 public class SaveLoader
 {
@@ -28,7 +28,7 @@ public class SaveLoader
             _keyValuePairs[key] = value;
         else
             _keyValuePairs.Add(key, value);
-        
+
 #if UNITY_WEBGL && !UNITY_EDITOR
         PlayerAccount.SetCloudSaveData(JsonConvert.SerializeObject(_keyValuePairs, Formatting.Indented));
 #endif

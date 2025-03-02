@@ -1,5 +1,5 @@
-﻿using IJunior.TypedScenes;
-using System;
+﻿using System;
+using IJunior.TypedScenes;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,7 +24,7 @@ namespace Menu
             if (adServise == null)
                 throw new ArgumentNullException();
 
-            if(leaderboard == null)
+            if (leaderboard == null)
                 throw new ArgumentNullException();
 
             if (leaderboard == null)
@@ -55,7 +55,7 @@ namespace Menu
             AsyncOperation asyncOperation = Game.LoadAsync(new GameConfig(_abilitiesConfig));
             asyncOperation.allowSceneActivation = false;
 
-            _adServise.ShowInterstation(() => asyncOperation.allowSceneActivation = true);            
+            _adServise.ShowInterstation(() => asyncOperation.allowSceneActivation = true);
         }
     }
 }

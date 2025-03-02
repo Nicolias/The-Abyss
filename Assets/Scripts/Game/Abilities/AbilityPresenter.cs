@@ -10,7 +10,7 @@ public class AbilityPresenter
         if (model == null)
             throw new ArgumentNullException();
 
-        if(view == null) 
+        if (view == null)
             throw new ArgumentNullException();
 
         _model = model;

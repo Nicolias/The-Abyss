@@ -1,5 +1,5 @@
-using Agava.WebUtility;
 using System;
+using Agava.WebUtility;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ public class PausServise : MonoBehaviour
 {
     [SerializeField] private bool _isPaus;
 
-    private List<IPausableObject> _pausableObjects = new List<IPausableObject>();
+    private readonly List<IPausableObject> _pausableObjects = new List<IPausableObject>();
 
     private bool _lastState;
 
@@ -31,7 +31,7 @@ public class PausServise : MonoBehaviour
                 Paus();
             else
                 UnPaus();
-        }            
+        }
     }
 
     public void Add(IPausableObject pausableObject)
@@ -44,7 +44,7 @@ public class PausServise : MonoBehaviour
 
     public void Remove(IPausableObject pausableObject)
     {
-        if(pausableObject == null)
+        if (pausableObject == null)
             throw new NullReferenceException();
 
         _pausableObjects.Remove(pausableObject);
@@ -59,7 +59,6 @@ public class PausServise : MonoBehaviour
     {
         _pausableObjects.ForEach(pausableObject => pausableObject.UnPaus());
     }
-
 
     private void OnBackgroundChanged(bool inBackground)
     {

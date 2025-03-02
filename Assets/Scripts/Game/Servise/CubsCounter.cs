@@ -7,11 +7,12 @@ public class CubsCounter : MonoBehaviour, IChangable
 {
     [SerializeField] private HoleCollider _holeCollider;
 
-    private List<Cub> _collectedCubs = new List<Cub>();
-    
+    private readonly List<Cub> _collectedCubs = new List<Cub>();
+
     public IEnumerable<Cub> CollectedCubs => _collectedCubs;
 
     public int Value => _collectedCubs.Count;
+
     public int MaxValue { get; private set; }
 
     public event Action<float> Changed;

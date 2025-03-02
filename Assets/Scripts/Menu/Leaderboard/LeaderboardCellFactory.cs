@@ -6,12 +6,12 @@ public class LeaderboardCellFactory : MonoBehaviour
     [SerializeField] private LeaderboardElement _tamplate;
     [SerializeField] private Transform _container;
 
-    List<LeaderboardElement> _spawnedElements = new List<LeaderboardElement>();
+    private List<LeaderboardElement> _spawnedElements = new List<LeaderboardElement>();
 
     public void ConstructLeaderboard(List<LeaderboardPlayer> leaderboards)
     {
         ClearLeaderboard();
-        
+
         foreach (var player in leaderboards)
         {
             LeaderboardElement leaderboardElement = Instantiate(_tamplate, _container);

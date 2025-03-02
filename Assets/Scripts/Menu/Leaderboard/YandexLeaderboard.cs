@@ -1,5 +1,5 @@
-using Agava.YandexGames;
 using System.Collections.Generic;
+using Agava.YandexGames;
 using UnityEngine;
 
 public class YandexLeaderboard : MonoBehaviour
@@ -7,7 +7,7 @@ public class YandexLeaderboard : MonoBehaviour
     private const string LeaderboardName = "Leaderboard12";
     private const string AnonymousName = "Anonymous";
 
-    private readonly List<LeaderboardPlayer> _leaderboardPlayers = new();
+    private readonly List<LeaderboardPlayer> _leaderboardPlayers = new List<LeaderboardPlayer>();
 
     [SerializeField] private LeaderboardCellFactory _leaderboardCellFactory;
 

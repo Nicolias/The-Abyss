@@ -1,5 +1,5 @@
-using Reflex.Attributes;
 using System;
+using Reflex.Attributes;
 using UnityEngine;
 
 public class HoleMovement : MonoBehaviour, IPausableObject
@@ -22,11 +22,9 @@ public class HoleMovement : MonoBehaviour, IPausableObject
 
     private void FixedUpdate()
     {
-        Vector2 direction = Vector2.up * _joystick.Vertical + Vector2.right * _joystick.Horizontal;
+        Vector2 direction = (Vector2.up * _joystick.Vertical) + (Vector2.right * _joystick.Horizontal);
 
-        transform.position += new Vector3(direction.x, 0, direction.y) 
-                             * _currentSpeed 
-                             * Time.fixedDeltaTime;
+        transform.position +=  new Vector3(direction.x * _currentSpeed * Time.fixedDeltaTime, 0, direction.y * _currentSpeed * Time.fixedDeltaTime);
     }
 
     public void AddSpeed(float speedFactor)

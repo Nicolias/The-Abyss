@@ -5,35 +5,37 @@ namespace ScalingSystem
 {
     public class Scaler
     {
-        private HoleCollider _holeCollider;
-        private ScalingObject _scalingObject;
-        private ScalerProgressBar _visualization;
+        private const int PointsCountForScale = 20;
 
-        private int _currentPoint = 0;
-        private int _pointsCountForScale = 20;
-        private Vector3 _scaleFactor;
+        private readonly HoleCollider _holeCollider;
+        private readonly ScalingObject _scalingObject;
+        private readonly ScalerProgressBar _visualization;
+
+        private readonly Vector3 _scaleFactor;
+
+        private int _currentPointsCount = 0;
 
         public Scaler(HoleCollider holeCollider, ScalingObject scalingObject, ScalerProgressBar progressBar, Vector3 scaleFactor)
         {
-            if(holeCollider == null)
+            if (holeCollider == null)
                 throw new ArgumentNullException();
-            
-            if(scalingObject == null)
+
+            if (scalingObject == null)
                 throw new ArgumentNullException();
-            
-            if(progressBar == null)
+
+            if (progressBar == null)
                 throw new ArgumentNullException();
-            
+
             _holeCollider = holeCollider;
             _scalingObject = scalingObject;
             _visualization = progressBar;
             _scaleFactor = scaleFactor;
         }
-        
+       
         public void Enable()
         {
             _holeCollider.Detected += OnDetected;
-            _visualization.Initialize(_pointsCountForScale);
+            _visualization.Initialize(PointsCountForScale);
         }
 
         public void Disable()
@@ -43,13 +45,13 @@ namespace ScalingSystem
 
         private void OnDetected(Cub cub)
         {
-            _currentPoint++;
+            _currentPointsCount++;
 
-            _visualization.UpdateUI(_currentPoint);
-            
-            if (_currentPoint == _pointsCountForScale)
+            _visualization.UpdateUI(_currentPointsCount);
+
+            if (_currentPointsCount == PointsCountForScale)
             {
-                _currentPoint = 0;
+                _currentPointsCount = 0;
                 _scalingObject.Scale(_scaleFactor);
                 _visualization.Reset();
             }

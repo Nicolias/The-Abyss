@@ -14,6 +14,7 @@ public class Timer : MonoBehaviour, IChangable, IPausableObject
     public int MaxValue { get; private set; }
 
     public event Action<float> Changed;
+
     public event Action Finished;
 
     [Inject]

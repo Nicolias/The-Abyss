@@ -20,7 +20,7 @@ public class AbilityVisualizView : MonoBehaviour
             throw new ArgumentNullException();
 
         _model = model;
-        _text.text = "";
+        _text.text = string.Empty;
         _itemImage.sprite = model.ItemSprite;
     }
 
@@ -64,12 +64,10 @@ public class AbilityVisualizView : MonoBehaviour
 
         while (_loadingImage.fillAmount != 0)
         {
-            _loadingImage.fillAmount = Mathf.MoveTowards
-            (
+            _loadingImage.fillAmount = Mathf.MoveTowards(
                 _loadingImage.fillAmount,
                 currentFillAmoundNormolized,
-                (_loadingImage.fillAmount - currentFillAmoundNormolized) * Time.deltaTime
-            );
+                (_loadingImage.fillAmount - currentFillAmoundNormolized) * Time.deltaTime);
 
             yield return null;
         }

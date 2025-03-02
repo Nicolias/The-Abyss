@@ -1,6 +1,6 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class AbilityRouter : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class AbilityRouter : MonoBehaviour
     [SerializeField] private AbilityStarter _starter;
     [SerializeField] private AbilityFinisher _finisher;
 
-    private List<AbilityPresenter> _presenters = new List<AbilityPresenter>();
+    private readonly List<AbilityPresenter> _presenters = new List<AbilityPresenter>();
 
     public void Initialize(IEnumerable<ItemModel> itemModels, CoroutineServise coroutineServise)
     {
@@ -18,8 +18,10 @@ public class AbilityRouter : MonoBehaviour
             throw new ArgumentNullException();
 
         foreach (ItemModel model in itemModels)
+        {
             if (model == null)
                 throw new ArgumentNullException();
+        }
 
         List<AbilityView> views = _viewFactory.CreateViews(itemModels);
         List<AbilityModel> models = CreatModels(itemModels, coroutineServise);

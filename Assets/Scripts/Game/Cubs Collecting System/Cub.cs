@@ -6,7 +6,7 @@ public class Cub : MonoBehaviour
     private Transform _transform;
     private GameObject _gameObject;
     private Rigidbody _rigidbody;
-    
+
     public Vector3 Position => _transform.position;
 
     private void Awake()
@@ -20,10 +20,10 @@ public class Cub : MonoBehaviour
     {
         _rigidbody.isKinematic = false;
     }
-    
+
     public void Disabel()
     {
         _rigidbody.isKinematic = true;
-        gameObject.SetActive(false);
+        _gameObject.SetActive(false);
     }
 }

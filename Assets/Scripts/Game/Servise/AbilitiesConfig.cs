@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class AbilitiesConfig
 {
-    private List<ItemModel> _itemsModel;
+    private readonly List<ItemModel> _itemsModel;
 
     public IEnumerable<ItemModel> Items => _itemsModel;
 
@@ -12,12 +12,14 @@ public class AbilitiesConfig
         if (saveLoader == null)
             throw new NullReferenceException();
 
-        if(itemsData == null)
+        if (itemsData == null)
             throw new NullReferenceException();
 
         foreach (var item in itemsData)
+        {
             if (item == null)
                 throw new NullReferenceException();
+        }
 
         _itemsModel = new List<ItemModel>();
 

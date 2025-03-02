@@ -2,22 +2,23 @@ using System;
 
 public class ItemModel
 {
-    private SaveLoader _loader;
+    private readonly SaveLoader _loader;
 
     public ItemModel(SaveLoader loader, ItemData data)
     {
-        if(loader == null)
+        if (loader == null)
             throw new NullReferenceException();
 
-        if(data == null) 
+        if (data == null)
             throw new NullReferenceException();
 
         _loader = loader;
         Data = data;
     }
 
+    public ItemData Data { get; }
+
     public int Count { get; private set; }
-    public ItemData Data { get; private set; }
 
     public event Action Changed;
 

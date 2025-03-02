@@ -25,7 +25,7 @@ public class GameFinisher : MonoBehaviour
         if (cubsCounter == null)
             throw new ArgumentNullException();
 
-        if(leaderboardReader == null)
+        if (leaderboardReader == null)
             throw new ArgumentNullException();
 
         _timer = timer;

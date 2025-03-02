@@ -1,5 +1,5 @@
-﻿using Reflex.Attributes;
-using System;
+﻿using System;
+using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,7 +23,7 @@ public class StatisticPanel : MonoBehaviour
         if (walletModel == null)
             throw new NullReferenceException();
 
-        if(adServise == null)
+        if (adServise == null)
             throw new NullReferenceException();
 
         _adServise = adServise;

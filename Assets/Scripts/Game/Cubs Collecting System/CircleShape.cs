@@ -9,7 +9,7 @@ public class CircleShape : SpawnShape
     {
         List<Vector3> positions = new List<Vector3>();
 
-        foreach (Transform t in _points) 
+        foreach (Transform t in _points)
             positions.Add(t.position);
 
         return positions;

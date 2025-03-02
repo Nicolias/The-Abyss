@@ -16,7 +16,6 @@ public class AbilityVisualizeFactory : MonoBehaviour
         {
             AbilityVisualizView view = Instantiate(_template, _container);
             view.Initialize(model);
-            
             _views.Add(view);
         }
     }
@@ -28,6 +27,6 @@ public class AbilityVisualizeFactory : MonoBehaviour
 
     public void Disable()
     {
-        _views.ForEach(_view => _view.Disable());
+        _views.ForEach(view => view.Disable());
     }
 }

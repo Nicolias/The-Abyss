@@ -1,6 +1,6 @@
+using System;
 using IJunior.TypedScenes;
 using Reflex.Attributes;
-using System;
 using UnityEngine;
 
 public class EntryPoint : MonoBehaviour, ISceneLoadHandler<GameConfig>

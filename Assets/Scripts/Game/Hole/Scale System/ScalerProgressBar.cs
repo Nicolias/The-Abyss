@@ -1,5 +1,4 @@
 ﻿using System;
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,21 +10,21 @@ namespace ScalingSystem
         [SerializeField] private ParticleSystem _particle;
 
         private Image _progressBar;
-        
+
         private float _maxValue;
 
         public void Initialize(int maxValue)
         {
             if (maxValue <= 0)
                 throw new ArgumentOutOfRangeException();
-            
+
             _maxValue = maxValue;
             _progressBar = GetComponent<Image>();
         }
 
         public void UpdateUI(float currentValue)
         {
-            if(currentValue < 0 || currentValue > _maxValue)
+            if (currentValue < 0 || currentValue > _maxValue)
                 throw new ArgumentOutOfRangeException();
 
             float fillValue = currentValue / _maxValue;

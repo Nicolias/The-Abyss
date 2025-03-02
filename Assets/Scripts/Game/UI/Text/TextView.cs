@@ -10,9 +10,9 @@ namespace SliderViewNameSpace
 
         protected TMP_Text Text
         {
-            get 
+            get
             {
-                if(_text == null)
+                if (_text == null)
                     _text = GetComponent<TMP_Text>();
 
                 return _text;

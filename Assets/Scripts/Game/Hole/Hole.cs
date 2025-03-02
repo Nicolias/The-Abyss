@@ -10,7 +10,7 @@ public class Hole : MonoBehaviour
     {
         _transform = transform;
     }
-    
+
     private void FixedUpdate()
     {
         if (_transform.hasChanged == false)

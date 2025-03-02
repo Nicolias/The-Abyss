@@ -19,7 +19,6 @@ public class ProjectInstaller : MonoBehaviour, IInstaller
 
         audioServise.Initialize(pausServise);
 
-
         builder.AddSingleton(saveLoader);
         builder.AddSingleton(adServise);
         builder.AddSingleton(walletSaver);

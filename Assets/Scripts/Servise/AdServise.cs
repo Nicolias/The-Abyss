@@ -1,14 +1,16 @@
-using Agava.YandexGames;
 using System;
+using Agava.YandexGames;
 using UnityEngine;
 
 public class AdServise
 {
     private Action _onCloseCallBack;
-    private PausServise _pausServise;
+    private readonly PausServise _pausServise;
 
     public event Action Opened;
+
     public event Action RewardCallback;
+
     public event Action Closed;
 
     public AdServise(PausServise pausServise)
