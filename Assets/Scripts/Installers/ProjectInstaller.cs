@@ -1,35 +1,41 @@
 using Reflex.Core;
+using Scripts.Menu.Leaderboard;
+using Scripts.Menu.ShopSystem;
+using Scripts.Servises;
 using UnityEngine;
 
-public class ProjectInstaller : MonoBehaviour, IInstaller
+namespace Scripts.Installers
 {
-    [SerializeField] private AudioServise _audioServise;
-    [SerializeField] private PausServise _pauseServise;
-
-    public void InstallBindings(ContainerBuilder builder)
+    public class ProjectInstaller : MonoBehaviour, IInstaller
     {
-        PausServise pausServise = Instantiate(_pauseServise);
-        AudioServise audioServise = Instantiate(_audioServise);
+        [SerializeField] private AudioServise _audioServise;
+        [SerializeField] private PausServise _pauseServise;
 
-        SaveLoader saveLoader = new SaveLoader();
-        AdServise adServise = new AdServise(pausServise);
-        WalletModel walletSaver = new WalletModel();
+        public void InstallBindings(ContainerBuilder builder)
+        {
+            PausServise pausServise = Instantiate(_pauseServise);
+            AudioServise audioServise = Instantiate(_audioServise);
 
-        LeaderboardReader leaderboardReader = new LeaderboardReader();
+            SaveLoader saveLoader = new SaveLoader();
+            AdServise adServise = new AdServise(pausServise);
+            WalletModel walletSaver = new WalletModel();
 
-        audioServise.Initialize(pausServise);
+            LeaderboardReader leaderboardReader = new LeaderboardReader();
 
-        builder.AddSingleton(saveLoader);
-        builder.AddSingleton(adServise);
-        builder.AddSingleton(walletSaver);
-        builder.AddSingleton(new WalletSaver(saveLoader, walletSaver));
+            audioServise.Initialize(pausServise);
 
-        builder.AddSingleton(leaderboardReader);
+            builder.AddSingleton(saveLoader);
+            builder.AddSingleton(adServise);
+            builder.AddSingleton(walletSaver);
+            builder.AddSingleton(new WalletSaver(saveLoader, walletSaver));
 
-        DontDestroyOnLoad(audioServise);
-        builder.AddSingleton(audioServise, typeof(AudioServise));
+            builder.AddSingleton(leaderboardReader);
 
-        DontDestroyOnLoad(pausServise);
-        builder.AddSingleton(pausServise);
+            DontDestroyOnLoad(audioServise);
+            builder.AddSingleton(audioServise, typeof(AudioServise));
+
+            DontDestroyOnLoad(pausServise);
+            builder.AddSingleton(pausServise);
+        }
     }
 }

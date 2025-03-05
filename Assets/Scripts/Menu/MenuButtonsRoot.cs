@@ -1,9 +1,12 @@
 ﻿using System;
 using IJunior.TypedScenes;
+using Scripts.Menu.Leaderboard;
+using Scripts.Servises;
+using Scripts.Menu.ShopSystem;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Menu
+namespace Scripts.Menu
 {
     public class MenuButtonsRoot : MonoBehaviour
     {

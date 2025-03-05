@@ -1,31 +1,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeaderboardCellFactory : MonoBehaviour
+namespace Scripts.Menu.Leaderboard
 {
-    [SerializeField] private LeaderboardElement _tamplate;
-    [SerializeField] private Transform _container;
-
-    private List<LeaderboardElement> _spawnedElements = new List<LeaderboardElement>();
-
-    public void ConstructLeaderboard(List<LeaderboardPlayer> leaderboards)
+    public class LeaderboardCellFactory : MonoBehaviour
     {
-        ClearLeaderboard();
+        [SerializeField] private LeaderboardElement _tamplate;
+        [SerializeField] private Transform _container;
 
-        foreach (var player in leaderboards)
+        private List<LeaderboardElement> _spawnedElements = new List<LeaderboardElement>();
+
+        public void ConstructLeaderboard(List<LeaderboardPlayer> leaderboards)
         {
-            LeaderboardElement leaderboardElement = Instantiate(_tamplate, _container);
-            leaderboardElement.Initialize(player.Name, player.Rank, player.Score);
+            ClearLeaderboard();
 
-            _spawnedElements.Add(leaderboardElement);
+            foreach (var player in leaderboards)
+            {
+                LeaderboardElement leaderboardElement = Instantiate(_tamplate, _container);
+                leaderboardElement.Initialize(player.Name, player.Rank, player.Score);
+
+                _spawnedElements.Add(leaderboardElement);
+            }
         }
-    }
 
-    private void ClearLeaderboard()
-    {
-        foreach (var element in _spawnedElements)
-            Destroy(element.gameObject);
+        private void ClearLeaderboard()
+        {
+            foreach (var element in _spawnedElements)
+                Destroy(element.gameObject);
 
-        _spawnedElements = new List<LeaderboardElement>();
+            _spawnedElements = new List<LeaderboardElement>();
+        }
     }
 }

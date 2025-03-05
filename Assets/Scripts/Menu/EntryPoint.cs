@@ -1,9 +1,13 @@
 using System.Collections.Generic;
 using Agava.YandexGames;
 using Reflex.Attributes;
+using Scripts.Menu.Leaderboard;
+using Scripts.Menu.ShopSystem;
+using Scripts.Menu.ShopSystem.Items;
+using Scripts.Servises;
 using UnityEngine;
 
-namespace Menu
+namespace Scripts.Menu
 {
     public class EntryPoint : MonoBehaviour
     {

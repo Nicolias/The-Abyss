@@ -1,19 +1,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Liner : MonoBehaviour
+namespace Scripts
 {
-    [SerializeField] private List<Transform> _objects = new List<Transform>();
-
-    private void OnValidate()
+    public class Liner : MonoBehaviour
     {
-        Vector3 currentPosition = transform.position;
+        [SerializeField] private List<Transform> _objects = new List<Transform>();
 
-        foreach (Transform t in _objects)
+        private void OnValidate()
         {
-            currentPosition = new Vector3(currentPosition.x + 2, currentPosition.y, currentPosition.z);
+            Vector3 currentPosition = transform.position;
 
-            t.position = currentPosition;
+            foreach (Transform transform in _objects)
+            {
+                currentPosition = new Vector3(currentPosition.x + 2, currentPosition.y, currentPosition.z);
+
+                transform.position = currentPosition;
+            }
         }
     }
 }

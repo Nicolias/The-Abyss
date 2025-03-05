@@ -2,27 +2,29 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LeaderboardOpenPanel : MonoBehaviour
+namespace Scripts.Menu.Leaderboard
 {
-    [SerializeField] private YandexLeaderboard _yandexLeaderboard;
-
-    [SerializeField] private Button _athorizedButton;
-    [SerializeField] private Button _closeButton;
-
-    private void OnEnable()
+    public class LeaderboardOpenPanel : MonoBehaviour
     {
-        _athorizedButton.onClick.AddListener(Authorize);
-        _closeButton.onClick.AddListener(ClosePanel);
-    }
+        [SerializeField] private YandexLeaderboard _yandexLeaderboard;
 
-    private void OnDisable()
-    {
-        _athorizedButton.onClick.RemoveListener(Authorize);
-        _closeButton.onClick.RemoveListener(ClosePanel);
-    }
+        [SerializeField] private Button _athorizedButton;
+        [SerializeField] private Button _closeButton;
 
-    public void OpenLeaderboard()
-    {
+        private void OnEnable()
+        {
+            _athorizedButton.onClick.AddListener(Authorize);
+            _closeButton.onClick.AddListener(ClosePanel);
+        }
+
+        private void OnDisable()
+        {
+            _athorizedButton.onClick.RemoveListener(Authorize);
+            _closeButton.onClick.RemoveListener(ClosePanel);
+        }
+
+        public void OpenLeaderboard()
+        {
 #if UNITY_WEBGL && !UNITY_EDITOR
         if (PlayerAccount.IsAuthorized)
             _yandexLeaderboard.Open();
@@ -31,22 +33,23 @@ public class LeaderboardOpenPanel : MonoBehaviour
 #else
             gameObject.SetActive(true);
 #endif
-    }
+        }
 
-    private void Authorize()
-    {
-        PlayerAccount.Authorize(() =>
+        private void Authorize()
         {
-            ClosePanel();
-            _yandexLeaderboard.Open();
-        });
+            PlayerAccount.Authorize(() =>
+            {
+                ClosePanel();
+                _yandexLeaderboard.Open();
+            });
 
-        if (PlayerAccount.IsAuthorized)
-            PlayerAccount.RequestPersonalProfileDataPermission();
-    }
+            if (PlayerAccount.IsAuthorized)
+                PlayerAccount.RequestPersonalProfileDataPermission();
+        }
 
-    private void ClosePanel()
-    {
-        gameObject.SetActive(false);
+        private void ClosePanel()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

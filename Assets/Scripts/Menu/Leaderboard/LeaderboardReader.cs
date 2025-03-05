@@ -1,11 +1,13 @@
 ﻿using Agava.YandexGames;
 
-public class LeaderboardReader
+namespace Scripts.Menu.Leaderboard
 {
-    private const string LeaderboardName = "Leaderboard12";
-
-    public void SetPlayerScore(int score)
+    public class LeaderboardReader
     {
+        private const string LeaderboardName = "Leaderboard12";
+
+        public void SetPlayerScore(int score)
+        {
 #if UNITY_WEBGL && !UNITY_EDITOR
         if (PlayerAccount.IsAuthorized == false) 
             return;
@@ -16,5 +18,6 @@ public class LeaderboardReader
                 Leaderboard.SetScore(LeaderboardName, score);
         });
 #endif
+        }
     }
 }

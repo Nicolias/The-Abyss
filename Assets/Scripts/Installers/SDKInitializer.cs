@@ -2,40 +2,45 @@ using System;
 using System.Collections;
 using Agava.YandexGames;
 using Reflex.Attributes;
+using Scripts.Menu.ShopSystem;
+using Scripts.Servises;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SDKInitializer : MonoBehaviour
+namespace Scripts.Installers
 {
-    private SaveLoader _saveLoader;
-    private WalletSaver _walletSaver;
-
-    [Inject]
-    public void Cunstruct(SaveLoader saveLoader, WalletSaver walletSaver)
+    public class SDKInitializer : MonoBehaviour
     {
-        if (saveLoader == null)
-            throw new NullReferenceException();
+        private SaveLoader _saveLoader;
+        private WalletSaver _walletSaver;
 
-        if (walletSaver == null)
-            throw new NullReferenceException();
+        [Inject]
+        public void Cunstruct(SaveLoader saveLoader, WalletSaver walletSaver)
+        {
+            if (saveLoader == null)
+                throw new NullReferenceException();
 
-        _saveLoader = saveLoader;
-        _walletSaver = walletSaver;
-    }
+            if (walletSaver == null)
+                throw new NullReferenceException();
 
-    private IEnumerator Start()
-    {
+            _saveLoader = saveLoader;
+            _walletSaver = walletSaver;
+        }
+
+        private IEnumerator Start()
+        {
 #if UNITY_WEBGL && !UNITY_EDITOR
         yield return YandexGamesSdk.Initialize();
 #else
-        yield return null;
+            yield return null;
 #endif
 
-        _saveLoader.Initialize();
-        yield return new WaitUntil(() => _saveLoader.IsInitialized);
+            _saveLoader.Initialize();
+            yield return new WaitUntil(() => _saveLoader.IsInitialized);
 
-        _walletSaver.Load();
+            _walletSaver.Load();
 
-        SceneManager.LoadScene(1);
+            SceneManager.LoadScene(1);
+        }
     }
 }
