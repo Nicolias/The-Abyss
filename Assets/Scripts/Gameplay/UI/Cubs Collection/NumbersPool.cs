@@ -1,6 +1,6 @@
+using System.Collections.Generic;
 using Scripts.Gameplay.Cubs;
 using Scripts.Gameplay.Hole;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Scripts.Gameplay.UI.CubsCollection

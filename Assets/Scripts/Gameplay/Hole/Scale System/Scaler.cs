@@ -1,5 +1,5 @@
-using Scripts.Gameplay.Cubs;
 using System;
+using Scripts.Gameplay.Cubs;
 using UnityEngine;
 
 namespace Scripts.Gameplay.Hole.ScaleSystem
