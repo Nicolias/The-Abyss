@@ -18,7 +18,7 @@ namespace Scripts.Servises
             WebApplication.InBackgroundChangeEvent += OnBackgroundChanged;
         }
 
-        private void OnDestory()
+        private void OnDestroy()
         {
             WebApplication.InBackgroundChangeEvent -= OnBackgroundChanged;
         }

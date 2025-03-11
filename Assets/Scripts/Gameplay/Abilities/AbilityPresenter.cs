@@ -25,7 +25,7 @@ namespace Scripts.Gameplay.Abilities
         {
             _model.Enable();
 
-            _view.Clicked += Onclicked;
+            _view.Clicked += OnClicked;
             _model.EffectEnd += TryEnableView;
             _model.CountChanged += _view.UpdateCountText;
         }
@@ -34,12 +34,12 @@ namespace Scripts.Gameplay.Abilities
         {
             _model.Disable();
 
-            _view.Clicked -= Onclicked;
+            _view.Clicked -= OnClicked;
             _model.EffectEnd -= TryEnableView;
             _model.CountChanged -= _view.UpdateCountText;
         }
 
-        private void Onclicked()
+        private void OnClicked()
         {
             _model.PlayEffect();
             _view.Disable();
