@@ -15,6 +15,10 @@ namespace Scripts.Gameplay.Abilities
 
         private readonly ItemModel _item;
 
+        public int Count => _item.Count;
+        public int EffectDuration => _item.Data.EffectDuration;
+        public Sprite ItemSprite => _item.Data.Sprite;
+
         public AbilityModel(AbilityStarter abilityStarter, AbilityFinisher abilityFinisher, ItemModel item, CoroutineServise coroutineServise)
         {
             if (abilityStarter == null)
@@ -34,11 +38,6 @@ namespace Scripts.Gameplay.Abilities
             _item = item;
             _coroutineServise = coroutineServise;
         }
-
-        public int Count => _item.Count;
-        public int EffectDuration => _item.Data.EffectDuration;
-
-        public Sprite ItemSprite => _item.Data.Sprite;
 
         public event Action EffectEnd;
 

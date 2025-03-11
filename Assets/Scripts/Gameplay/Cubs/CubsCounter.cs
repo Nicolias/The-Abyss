@@ -12,11 +12,11 @@ namespace Scripts.Gameplay.Cubs
 
         private readonly List<Cub> _collectedCubs = new List<Cub>();
 
+        public int MaxValue { get; private set; }
+
         public IEnumerable<Cub> CollectedCubs => _collectedCubs;
 
         public int Value => _collectedCubs.Count;
-
-        public int MaxValue { get; private set; }
 
         public event Action<float> Changed;
 
