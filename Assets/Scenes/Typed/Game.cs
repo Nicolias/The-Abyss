@@ -10,6 +10,7 @@
 
 namespace IJunior.TypedScenes
 {
+    using Scripts.Gameplay.UI.Serivise;
     using UnityEngine.SceneManagement;
     
     

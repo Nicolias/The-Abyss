@@ -5,74 +5,77 @@ using Scripts.Servises;
 using Scripts.Gameplay.UI.Sliders;
 using UnityEngine;
 
-public class Timer : MonoBehaviour, IChangable, IPausableObject
+namespace Scripts.Gameplay.UI.Serivise
 {
-    private bool _isPause;
-
-    private Coroutine _currentTimer;
-    private PausServise _pauseServise;
-
-    public int MaxValue { get; private set; }
-
-    public event Action<float> Changed;
-
-    public event Action Finished;
-
-    [Inject]
-    public void Construct(PausServise pausServise)
+    public class Timer : MonoBehaviour, IChangable, IPausableObject
     {
-        _pauseServise = pausServise;
-        _pauseServise.Add(this);
-    }
+        private bool _isPause;
 
-    public void Initialize(int maxTime)
-    {
-        MaxValue = maxTime;
+        private Coroutine _currentTimer;
+        private PausServise _pauseServise;
 
-        _currentTimer = StartCoroutine(PlayTimer());
-    }
+        public int MaxValue { get; private set; }
 
-    public void Reset()
-    {
-        StopCoroutine(_currentTimer);
-        _isPause = false;
-    }
+        public event Action<float> Changed;
 
-    public void Paus()
-    {
-        _isPause = true;
-    }
+        public event Action Finished;
 
-    public void UnPaus()
-    {
-        _isPause = false;
-    }
-
-    private IEnumerator PlayTimer()
-    {
-        WaitForSeconds waitForSeconds = new WaitForSeconds(1f);
-        int timeLeft = MaxValue;
-
-        while (timeLeft > 0)
+        [Inject]
+        public void Construct(PausServise pausServise)
         {
-            if (_isPause)
-            {
-                yield return null;
-            }
-            else
-            {
-                Changed?.Invoke(timeLeft);
-
-                yield return waitForSeconds;
-                timeLeft--;
-            }
+            _pauseServise = pausServise;
+            _pauseServise.Add(this);
         }
 
-        Finished?.Invoke();
-    }
+        public void Initialize(int maxTime)
+        {
+            MaxValue = maxTime;
 
-    private void OnBackgroundChanged(bool inBackground)
-    {
-        _isPause = inBackground;
+            _currentTimer = StartCoroutine(PlayTimer());
+        }
+
+        public void Reset()
+        {
+            StopCoroutine(_currentTimer);
+            _isPause = false;
+        }
+
+        public void Paus()
+        {
+            _isPause = true;
+        }
+
+        public void UnPaus()
+        {
+            _isPause = false;
+        }
+
+        private IEnumerator PlayTimer()
+        {
+            WaitForSeconds waitForSeconds = new WaitForSeconds(1f);
+            int timeLeft = MaxValue;
+
+            while (timeLeft > 0)
+            {
+                if (_isPause)
+                {
+                    yield return null;
+                }
+                else
+                {
+                    Changed?.Invoke(timeLeft);
+
+                    yield return waitForSeconds;
+                    timeLeft--;
+                }
+            }
+
+            Finished?.Invoke();
+        }
+
+        private void OnBackgroundChanged(bool inBackground)
+        {
+            _isPause = inBackground;
+        }
     }
 }

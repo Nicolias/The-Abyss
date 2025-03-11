@@ -1,18 +1,21 @@
 ﻿using System;
 
-[Serializable]
-public class GameConfig
+namespace Scripts.Gameplay.UI.Serivise
 {
-    public int CubsCount { get; private set; } = 174;
-    public int TimerValue { get; private set; } = 20;
-
-    public AbilitiesConfig Abilities { get; private set; }
-
-    public GameConfig(AbilitiesConfig abilities)
+    [Serializable]
+    public class GameConfig
     {
-        if (abilities == null)
-            throw new NullReferenceException();
+        public int CubsCount { get; private set; } = 174;
+        public int TimerValue { get; private set; } = 20;
 
-        Abilities = abilities;
+        public AbilitiesConfig Abilities { get; private set; }
+
+        public GameConfig(AbilitiesConfig abilities)
+        {
+            if (abilities == null)
+                throw new NullReferenceException();
+
+            Abilities = abilities;
+        }
     }
 }

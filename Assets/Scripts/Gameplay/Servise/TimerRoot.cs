@@ -1,16 +1,19 @@
 ﻿using Scripts.Gameplay.UI.Sliders;
 using UnityEngine;
 
-public class TimerRoot : MonoBehaviour
+namespace Scripts.Gameplay.UI.Serivise
 {
-    [SerializeField] private Timer _timer;
-    [SerializeField] private TimerSlider _timerTimerSlider;
-
-    public Timer Timer => _timer;
-
-    public void Initialize(int timeValue)
+    public class TimerRoot : MonoBehaviour
     {
-        _timer.Initialize(timeValue);
-        _timerTimerSlider.Initialize(_timer);
+        [SerializeField] private Timer _timer;
+        [SerializeField] private TimerSlider _timerTimerSlider;
+
+        public Timer Timer => _timer;
+
+        public void Initialize(int timeValue)
+        {
+            _timer.Initialize(timeValue);
+            _timerTimerSlider.Initialize(_timer);
+        }
     }
 }

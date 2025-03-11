@@ -3,34 +3,37 @@ using System.Collections.Generic;
 using Scripts.Menu.ShopSystem.Items;
 using Scripts.Servises;
 
-public class AbilitiesConfig
+namespace Scripts.Gameplay.UI.Serivise
 {
-    private readonly List<ItemModel> _itemsModel;
-
-    public IEnumerable<ItemModel> Items => _itemsModel;
-
-    public AbilitiesConfig(SaveLoader saveLoader, List<ItemData> itemsData)
+    public class AbilitiesConfig
     {
-        if (saveLoader == null)
-            throw new NullReferenceException();
+        private readonly List<ItemModel> _itemsModel;
 
-        if (itemsData == null)
-            throw new NullReferenceException();
+        public IEnumerable<ItemModel> Items => _itemsModel;
 
-        foreach (var item in itemsData)
+        public AbilitiesConfig(SaveLoader saveLoader, List<ItemData> itemsData)
         {
-            if (item == null)
+            if (saveLoader == null)
                 throw new NullReferenceException();
-        }
 
-        _itemsModel = new List<ItemModel>();
+            if (itemsData == null)
+                throw new NullReferenceException();
 
-        for (int i = 0; i < itemsData.Count; i++)
-        {
-            ItemModel newItem = new ItemModel(saveLoader, itemsData[i]);
+            foreach (var item in itemsData)
+            {
+                if (item == null)
+                    throw new NullReferenceException();
+            }
 
-            newItem.Enable();
-            _itemsModel.Add(newItem);
+            _itemsModel = new List<ItemModel>();
+
+            for (int i = 0; i < itemsData.Count; i++)
+            {
+                ItemModel newItem = new ItemModel(saveLoader, itemsData[i]);
+
+                newItem.Enable();
+                _itemsModel.Add(newItem);
+            }
         }
     }
 }
