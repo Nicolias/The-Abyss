@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Scripts.Gameplay.Cubs;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -58,15 +59,18 @@ namespace Scripts.Gameplay
 
         private IEnumerator ShowQueue()
         {
+            int cubRotationForce = 3600;
+            int numberCubsPerPool = 10;
+
             List<Vector3> postions = _heartMap.GetPositions();
 
             for (int i = 0; i < _cubs.Count; i++)
             {
-                _cubs[i].DOJump(postions[i] + new Vector3(0, 0.1f, 0), _force, 1, _animationDuration);
-                _cubs[i].DORotate(new Vector3(0, 360 * 10, 360 * 10), _animationDuration, RotateMode.FastBeyond360);
+                _cubs[i].DOJump(postions[i] + Vector3.zero, _force, 1, _animationDuration);
+                _cubs[i].DORotate(new Vector3(0, cubRotationForce, cubRotationForce), _animationDuration, RotateMode.FastBeyond360);
                 _cubs[i].DORotate(Vector3.zero, 0);
 
-                if (i != 0 && i % 10 == 0)
+                if (i != 0 && i % numberCubsPerPool == 0)
                     yield return new WaitForSeconds(0.5f);
             }
 
@@ -74,7 +78,7 @@ namespace Scripts.Gameplay
 
             yield return new WaitForSeconds(_animationDuration);
 
-            yield return _keepGoingImage.transform.DOLocalMove(new Vector3(0, 0, 0), _animationDuration / 2).WaitForCompletion();
+            yield return _keepGoingImage.transform.DOLocalMove(Vector3.zero, _animationDuration / 2).WaitForCompletion();
 
             Complete?.Invoke();
 

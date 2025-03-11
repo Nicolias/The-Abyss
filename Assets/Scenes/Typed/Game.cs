@@ -10,7 +10,6 @@
 
 namespace IJunior.TypedScenes
 {
-    using Scripts.Gameplay.UI.Serivise;
     using UnityEngine.SceneManagement;
     
     
@@ -19,12 +18,12 @@ namespace IJunior.TypedScenes
         
         private const string _sceneName = "Game";
         
-        public static void Load(GameConfig argument, LoadSceneMode loadSceneMode = LoadSceneMode.Single)
+        public static void Load(Scripts.Gameplay.UI.Serivise.GameConfig argument, LoadSceneMode loadSceneMode = LoadSceneMode.Single)
         {
             LoadScene(_sceneName, loadSceneMode, argument);
         }
         
-        public static UnityEngine.AsyncOperation LoadAsync(GameConfig argument, LoadSceneMode loadSceneMode = LoadSceneMode.Single)
+        public static UnityEngine.AsyncOperation LoadAsync(Scripts.Gameplay.UI.Serivise.GameConfig argument, LoadSceneMode loadSceneMode = LoadSceneMode.Single)
         {
             return LoadScene(_sceneName, loadSceneMode, argument);
         }

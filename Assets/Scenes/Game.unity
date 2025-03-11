@@ -15678,8 +15678,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 408045723}
-  - component: {fileID: 408045724}
   - component: {fileID: 408045725}
+  - component: {fileID: 408045727}
   - component: {fileID: 408045726}
   m_Layer: 0
   m_Name: Ad Panel
@@ -15717,21 +15717,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &408045724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 408045722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce250bf27d27ce3439e2d45db099f909, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _openAnimation: {fileID: 408045726}
-  _showAdButton: {fileID: 732204848}
-  _closeButton: {fileID: 312656337}
 --- !u!222 &408045725
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15749,13 +15734,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 408045722}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e94bd550a56fc434192263774128b4d1, type: 3}
+  m_Script: {fileID: 11500000, guid: dbef6bcebbdbea546b49ad5f2906251e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _slider: {fileID: 1514289983}
   _currentRewardText: {fileID: 1480390635}
   _maxRewardText: {fileID: 1828968329}
-  _showAdButtonAnimator: {fileID: 1146925660}
+  _showAdButtonAnimator: {fileID: 0}
+--- !u!114 &408045727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 408045722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 955584793f7b3b1479a80ecd5a4a6609, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _openAnimation: {fileID: 408045726}
+  _showAdButton: {fileID: 732204848}
+  _closeButton: {fileID: 312656337}
 --- !u!1001 &419939803
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23281,7 +23281,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 33.65
+  m_fontSize: 26.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -50937,7 +50937,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 71.35
+  m_fontSize: 63
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -55160,9 +55160,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _finalAnimation: {fileID: 1279011618}
   _ui: {fileID: 1734280499}
-  _statisticPanel: {fileID: 408045724}
+  _statisticPanel: {fileID: 408045727}
   _holeMovement: {fileID: 1235859990}
-  _endGamePanel: {fileID: 0}
+  _endGamePanel: {fileID: 1427909571}
 --- !u!1 &1423061685
 GameObject:
   m_ObjectHideFlags: 0
@@ -57208,7 +57208,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48.65
+  m_fontSize: 37.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -65358,7 +65358,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32.4
+  m_fontSize: 25.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -65712,7 +65712,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27.2
+  m_fontSize: 21.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -70079,7 +70079,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.1
+  m_fontSize: 18
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -80870,7 +80870,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32.4
+  m_fontSize: 25.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -81703,7 +81703,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 47.6
+  m_fontSize: 36.85
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
