@@ -1,4 +1,5 @@
-﻿using Scripts.Gameplay.UI.Serivise;
+﻿using NaughtyAttributes;
+using Scripts.Gameplay.UI.Serivise;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,6 +10,8 @@ namespace Scripts.Gameplay.UI.Panels
     {
         [SerializeField] private Button _restartButton;
         [SerializeField] private Button _openMenuButton;
+
+        [SerializeField, Scene] private string _menuScene;
 
         private GameConfig _gameConfig;
 
@@ -36,7 +39,7 @@ namespace Scripts.Gameplay.UI.Panels
 
         private void OpenMenu()
         {
-            SceneManager.LoadScene("Menu");
+            SceneManager.LoadScene(_menuScene);
         }
 
         private void ResetGame()

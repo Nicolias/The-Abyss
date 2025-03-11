@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Agava.YandexGames;
+using NaughtyAttributes;
 using Reflex.Attributes;
 using Scripts.Menu.ShopSystem;
 using Scripts.Servises;
@@ -11,6 +12,8 @@ namespace Scripts.Installers
 {
     public class SDKInitializer : MonoBehaviour
     {
+        [SerializeField, Scene] private string _menuScene;
+
         private SaveLoader _saveLoader;
         private WalletSaver _walletSaver;
 
@@ -40,7 +43,7 @@ namespace Scripts.Installers
 
             _walletSaver.Load();
 
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(_menuScene);
         }
     }
 }

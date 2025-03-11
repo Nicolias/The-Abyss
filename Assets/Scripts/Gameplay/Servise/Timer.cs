@@ -72,10 +72,5 @@ namespace Scripts.Gameplay.UI.Serivise
 
             Finished?.Invoke();
         }
-
-        private void OnBackgroundChanged(bool inBackground)
-        {
-            _isPause = inBackground;
-        }
     }
 }

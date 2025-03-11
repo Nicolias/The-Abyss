@@ -1,5 +1,4 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using Scripts.Servises;
 using UnityEngine;
 
@@ -17,8 +16,6 @@ namespace Scripts.Gameplay.Hole.ScaleSystem
 
         private Scaler _scaler;
         private Transform _selfTransform;
-
-        public event Action Completed;
 
         private void Awake()
         {
@@ -38,13 +35,13 @@ namespace Scripts.Gameplay.Hole.ScaleSystem
 
         public void Scale(Vector3 scaleFactor)
         {
-            _selfTransform.DOScale(_selfTransform.localScale + scaleFactor, ScalingDuration).OnComplete(() => Completed?.Invoke());
+            _selfTransform.DOScale(_selfTransform.localScale + scaleFactor, ScalingDuration);
             _soundObject.PlaySound();
         }
 
         public void Unscale(Vector3 scaleFactor)
         {
-            _selfTransform.DOScale(_selfTransform.localScale - scaleFactor, ScalingDuration).OnComplete(() => Completed?.Invoke());
+            _selfTransform.DOScale(_selfTransform.localScale - scaleFactor, ScalingDuration);
         }
     }
 }
