@@ -1,20 +1,28 @@
-﻿using Scripts.Menu.ShopSystem.Items;
+﻿using Scripts.Gameplay.Hole;
+using Scripts.Gameplay.Hole.ScaleSystem;
+using Scripts.Gameplay.UI.Serivise;
+using Scripts.Menu.ShopSystem.Items;
 
 namespace Scripts.Gameplay.Abilities
 {
-    public class AbilityFinisher : AbilityVisitor
+    public class AbilityFinisher : AbstractAbilityEffector
     {
-        public override void Visit(FreezTime freezTime)
+        public AbilityFinisher(HoleMovement movement, Timer timer, ScalingObject scalingObject) 
+            : base(movement, timer, scalingObject)
+        {
+        }
+
+        public override void FreezTime()
         {
             Timer.UnPaus();
         }
 
-        public override void Visit(ScaleUp scaleUp)
+        public override void ChangeScale(ScaleUp scaleUp)
         {
             ScalingObject.Unscale(scaleUp.Value);
         }
 
-        public override void Visit(SpeedUp speedUp)
+        public override void ChangeSpeed(SpeedUp speedUp)
         {
             Movement.RemoveSpeed(speedUp.Value);
         }

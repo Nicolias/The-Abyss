@@ -39,9 +39,9 @@ namespace Scripts.Gameplay.Abilities
             _coroutineServise = coroutineServise;
         }
 
-        public event Action EffectEnd;
-
         public event Action EffectStarted;
+
+        public event Action EffectEnd;
 
         public event Action<int> CountChanged;
 
@@ -49,12 +49,12 @@ namespace Scripts.Gameplay.Abilities
 
         public void Enable()
         {
-            _item.Changed += OnCountChange;
+            _item.CountChanged += OnCountChanged;
         }
 
         public void Disable()
         {
-            _item.Changed -= OnCountChange;
+            _item.CountChanged -= OnCountChanged;
         }
 
         public void PlayEffect()
@@ -85,9 +85,9 @@ namespace Scripts.Gameplay.Abilities
             EffectEnd?.Invoke();
         }
 
-        private void OnCountChange()
+        private void OnCountChanged(int count)
         {
-            CountChanged?.Invoke(Count);
+            CountChanged?.Invoke(count);
         }
     }
 }

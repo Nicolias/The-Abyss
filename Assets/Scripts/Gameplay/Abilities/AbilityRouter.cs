@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using Scripts.Gameplay.Abilities.Visualization;
+using Scripts.Gameplay.Hole.ScaleSystem;
+using Scripts.Gameplay.Hole;
 using Scripts.Menu.ShopSystem.Items;
 using Scripts.Servises;
 using UnityEngine;
+using Scripts.Gameplay.UI.Serivise;
 
 namespace Scripts.Gameplay.Abilities
 {
@@ -12,8 +15,12 @@ namespace Scripts.Gameplay.Abilities
         [SerializeField] private AbilityViewFactory _viewFactory;
         [SerializeField] private AbilityVisualizeFactory _visualizeFactory;
 
-        [SerializeField] private AbilityStarter _starter;
-        [SerializeField] private AbilityFinisher _finisher;
+        [SerializeField] private HoleMovement _movement;
+        [SerializeField] private Timer _timer;
+        [SerializeField] private ScalingObject _scalingObject;
+
+        private AbilityStarter _starter;
+        private AbilityFinisher _finisher;
 
         private readonly List<AbilityPresenter> _presenters = new List<AbilityPresenter>();
 
@@ -21,6 +28,9 @@ namespace Scripts.Gameplay.Abilities
         {
             if (itemModels == null)
                 throw new ArgumentNullException();
+
+            _starter = new AbilityStarter(_movement, _timer, _scalingObject);
+            _finisher = new AbilityFinisher(_movement, _timer, _scalingObject);
 
             foreach (ItemModel model in itemModels)
             {

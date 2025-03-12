@@ -23,7 +23,7 @@ namespace Scripts.Menu.ShopSystem.Items
 
         public int Count { get; private set; }
 
-        public event Action Changed;
+        public event Action<int> CountChanged;
 
         public void Enable()
         {
@@ -34,7 +34,7 @@ namespace Scripts.Menu.ShopSystem.Items
         {
             Count++;
 
-            Changed?.Invoke();
+            CountChanged?.Invoke(Count);
             Save();
         }
 
@@ -44,7 +44,7 @@ namespace Scripts.Menu.ShopSystem.Items
                 throw new InvalidOperationException();
 
             Count--;
-            Changed?.Invoke();
+            CountChanged?.Invoke(Count);
             Save();
         }
 

@@ -34,19 +34,19 @@ namespace Scripts.Menu.ShopSystem
             _price.text = _model.Data.Price.ToString();
             _image.sprite = _model.Data.Sprite;
 
-            OnChanged();
+            OnChanged(_model.Count);
         }
 
         private void OnEnable()
         {
             _button.onClick.AddListener(OnClicked);
-            _model.Changed += OnChanged;
+            _model.CountChanged += OnChanged;
         }
 
         private void OnDisable()
         {
             _button.onClick.RemoveListener(OnClicked);
-            _model.Changed -= OnChanged;
+            _model.CountChanged -= OnChanged;
         }
 
         private void OnClicked()
@@ -54,9 +54,9 @@ namespace Scripts.Menu.ShopSystem
             _buyPanel.Open(_model);
         }
 
-        private void OnChanged()
+        private void OnChanged(int count)
         {
-            _countText.text = _model.Count.ToString();
+            _countText.text = count.ToString();
         }
     }
 }

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Lean.Localization;
-using Scripts.Gameplay.Abilities;
 using UnityEngine;
 
 namespace Scripts.Menu.ShopSystem.Items
@@ -32,7 +31,5 @@ namespace Scripts.Menu.ShopSystem.Items
             if (string.IsNullOrEmpty(Name))
                 throw new InvalidOperationException();
         }
-
-        public abstract void Accept(AbilityVisitor abilityVisitor);
     }
 }
